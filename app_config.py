@@ -9,13 +9,13 @@ class Config:
     
     # Configurações do BD
     DEBUG = os.getenv('DEBUG_MODE')
-    SQLALCHEMY_DATABASE_URL = os.getenv('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SECRET_KEY = os.getenv('SECRET_KEY')
     
     # Método para verificação das variáveis críticas
     @staticmethod
     def validacao_config():
-        if not Config.SQLALCHEMY_DATABASE_URL:
+        if not Config.SQLALCHEMY_DATABASE_URI:
             raise ValueError("A variável de ambiente 'DATABASE_URL' não está configurada corretamente.")
         
         if not Config.SECRET_KEY:

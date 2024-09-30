@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy # Gerenciamento do Banco de dados
 from flask_login import LoginManager # Gerenciamento do Login
 from flask_wtf.csrf import CSRFProtect # Proteção contra ataques CSRF
 from flask_session import Session # Gerenciamento da Sessão
-from TREINAMENTO.models import Responsavel # Tabela com os usuários do sistema
 
 # Configurações de ambiente
 from app_config import Config
@@ -29,8 +28,9 @@ def criacao_app():
     login_manager.init_app(app)
     csrf.init_app(app)
 
-    # Inicialização do Flask-Session
-    Session(app)
+    # Importação dos models após a inicialização do app
+    with app.app_context():
+        from TREINAMENTO.models import Responsavel # Tabela com os usuários do sistema
 
     # Carrega as informações do usuário através do id
     @login_manager.user_loader

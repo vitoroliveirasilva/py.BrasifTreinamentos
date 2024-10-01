@@ -16,3 +16,11 @@ class Treinamento(db.Model):
     def __repr__(self):
         return f"<Treinamento(id_treinamento={self.id_treinamento}, treinamento='{self.treinamento}', id_marca={self.id_marca})>"
     
+    # Método para cadastrar um treinamento a partir do formulário
+    @classmethod
+    def cadastro_treinamento(cls, form):
+        return cls(
+            id_marca=form.id_marca.data,
+            treinamento=form.treinamento.data,
+            descricao=form.descricao.data
+        )

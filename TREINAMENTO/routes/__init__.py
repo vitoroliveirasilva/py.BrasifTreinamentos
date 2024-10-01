@@ -4,5 +4,6 @@ from .empresa.cadastro_empresa_routes import cadastro_empresa
 from .login.cadastro_login_routes import cadastro_login
 from .marca.cadastro_marca_routes import cadastro_marca
 from .tipo.cadastro_tipo_routes import cadastro_tipo
+from .tipo.edicao_tipo_routes import editar_tipo
 from .treinamento.cadastro_treinamento_routes import cadastro_treinamento
 from .treinamento.edicao_treinamento_routes import editar_treinamento

@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash
 from flask_login import login_required
 from TREINAMENTO import app, db
-from TREINAMENTO.forms.treinamento.cadastro_treinamento_forms import TreinamentoForm
+from TREINAMENTO.forms.treinamento.edicao_treinamento_forms import TreinamentoForm
 from TREINAMENTO.models import Treinamento, Marca
 
 @app.route("/editar/treinamento/<int:id>", methods=["GET", "POST"])
@@ -9,7 +9,6 @@ from TREINAMENTO.models import Treinamento, Marca
 def editar_treinamento(id):
     treinamento = Treinamento.query.get_or_404(id)
     form = TreinamentoForm(obj=treinamento)
-    print(form)
 
     marcas = Marca.query.all()
     form.id_marca.choices = [(marca.id_marca, marca.nome) for marca in marcas]

@@ -32,5 +32,4 @@ class Treinamento(db.Model):
         self.treinamento = form.treinamento.data
         self.descricao = form.descricao.data
         self.status = form.status.data
-        self.data_alteracao = datetime.utcnow()
         return self

@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash
 from TREINAMENTO import app, db
 from flask_login import login_required
-from TREINAMENTO.forms.empresa_forms import EmpresaForm
+from TREINAMENTO.forms.empresa.cadastro_empresa_forms import EmpresaForm
 from TREINAMENTO.models import Empresa
 
 @app.route("/cadastro/empresa", methods=["GET", "POST"])

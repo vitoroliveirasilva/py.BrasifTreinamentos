@@ -7,4 +7,4 @@ class EmpresaForm(FlaskForm):
     nome_empresa = StringField('Nome', validators=[DataRequired(), Length(max=100)])
     filial = SelectField('Filial', choices=[(f.name, f.value) for f in Filiais], validators=[DataRequired()])
     status = BooleanField('Ativo', default=True)
-    submit = SubmitField('Cadastrar')
+    submit = SubmitField('Salvar Alterações')

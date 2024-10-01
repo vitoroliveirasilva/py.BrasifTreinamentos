@@ -7,4 +7,4 @@ class TreinamentoForm(FlaskForm):
     treinamento = StringField('Treinamento', validators=[DataRequired()])
     descricao = TextAreaField('Descrição')
     status = BooleanField('Ativo', default=True)
-    submit = SubmitField('Cadastrar')
+    submit = SubmitField('Cadastrar treinamento')

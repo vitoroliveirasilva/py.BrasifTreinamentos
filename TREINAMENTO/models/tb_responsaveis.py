@@ -36,4 +36,11 @@ class Responsavel(db.Model):
 
     def get_id(self):
         # Retorna o ID do usuário
-        return str(self.id)    
+        return str(self.id)
+    
+
+    # Método para atualizar o responsável existente a partir do formulário
+    def atualizar_responsavel(self, form):
+        self.permissao = form.permissao.data
+        self.status = form.status.data
+        return self

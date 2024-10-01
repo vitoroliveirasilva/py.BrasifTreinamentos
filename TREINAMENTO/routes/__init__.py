@@ -24,3 +24,6 @@ from .tipo.edicao_tipo_routes import editar_tipo
 # Treinamento
 from .treinamento.cadastro_treinamento_routes import cadastro_treinamento
 from .treinamento.edicao_treinamento_routes import editar_treinamento
+
+# Responsável
+from .responsavel.edicao_responsavel_routes import editar_responsavel

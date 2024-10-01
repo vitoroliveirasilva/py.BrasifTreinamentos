@@ -19,4 +19,4 @@ def editar_marca(id):
         flash("marca atualizado com sucesso!", "success")
         return redirect(url_for("cadastro_marca"))
 
-    return render_template("/edicao/edicao_marca.html", form=form, tipos=tipos)
+    return render_template("/edicao/edicao_marca.html", form=form, marca=marca)

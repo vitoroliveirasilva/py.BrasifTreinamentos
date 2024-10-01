@@ -21,3 +21,6 @@ from .tipo.edicao_tipo_forms import TipoForm
 # Treinamento
 from .treinamento.cadastro_treinamento_forms import TreinamentoForm
 from .treinamento.edicao_treinamento_forms import TreinamentoForm
+
+# Responsável
+from .responsavel.edicao_responsavel_forms import ResponsavelForm

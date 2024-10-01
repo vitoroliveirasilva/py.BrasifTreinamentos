@@ -16,7 +16,7 @@ def editar_colaborador(id):
     if form.validate_on_submit():
         Colaborador.atualizar_colaborador(colaborador, form)
         db.session.commit()
-        flash("Empresa atualizado com sucesso!", "success")
+        flash("Colaborador atualizado com sucesso!", "success")
         return redirect(url_for("cadastro_colaborador"))
 
     return render_template("/edicao/edicao_colaborador.html", form=form, colaborador=colaborador)

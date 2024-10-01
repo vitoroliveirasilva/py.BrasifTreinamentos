@@ -10,7 +10,6 @@ def cadastro_colaborador():
     form = ColaboradorForm()
 
     id_responsavel = current_user.id
-    print(id_responsavel)
 
     empresas = Empresa.query.all()
     form.id_empresa.choices = [(empresa.id_empresa, empresa.nome_empresa) for empresa in empresas]

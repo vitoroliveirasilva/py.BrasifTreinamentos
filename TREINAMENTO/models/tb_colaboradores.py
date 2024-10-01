@@ -32,3 +32,13 @@ class Colaborador(db.Model):
             filial=form.filial.data,
             status=form.status.data
         )
+    
+    # Método para atualizar o colaborador existente a partir do formulário
+    def atualizar_colaborador(self, form):
+        self.nome = form.nome.data
+        self.email = form.email.data
+        self.cargo = form.cargo.data
+        self.id_empresa = form.id_empresa.data
+        self.filial = form.filial.data
+        self.status = form.status.data
+        return self

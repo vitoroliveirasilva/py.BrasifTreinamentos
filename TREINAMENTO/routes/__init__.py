@@ -3,6 +3,7 @@ from .autenticacao.autenticacao_routes import *
 
 # Colaborador
 from .colaborador.cadastro_colaborador_routes import cadastro_colaborador
+from .colaborador.edicao_colaborador_routes import editar_colaborador
 
 # Empresa
 from .empresa.cadastro_empresa_routes import cadastro_empresa

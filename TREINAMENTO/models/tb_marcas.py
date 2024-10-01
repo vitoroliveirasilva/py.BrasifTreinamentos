@@ -24,3 +24,10 @@ class Marca(db.Model):
             id_tipo=form.id_tipo.data,
             status=form.status.data
         )
+    
+    # Método para atualizar a marca existente a partir do formulário
+    def atualizar_marca(self, form):
+        self.nome = form.nome.data
+        self.id_tipo = form.id_tipo.data
+        self.status = form.status.data
+        return self

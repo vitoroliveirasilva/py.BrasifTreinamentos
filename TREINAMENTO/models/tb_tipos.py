@@ -22,7 +22,7 @@ class Tipo(db.Model):
             status=form.status.data
         )
     
-    # Método para atualizar o treinamento existente a partir do formulário
+    # Método para atualizar o tipo existente a partir do formulário
     def atualizar_tipo(self, form):
         self.nome = form.nome.data
         self.status = form.status.data

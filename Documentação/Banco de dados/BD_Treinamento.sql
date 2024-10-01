@@ -72,8 +72,9 @@ CREATE TABLE `tb_inscricoes` (
   `id_inscricao` INT PRIMARY KEY AUTO_INCREMENT,
   `id_colaborador` INT NOT NULL,
   `id_treinamento` INT NOT NULL,
+  `id_responsavel` INT NOT NULL,
   `data_inscricao` DATE NOT NULL,
-  `status` VARCHAR(50) NOT NULL,
+  `status` ENUM('Pendente', 'Concluída', 'Cancelada') NOT NULL,
   `data_criacao` TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
   `data_alteracao` TIMESTAMP DEFAULT (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)
 );
@@ -94,3 +95,5 @@ ALTER TABLE `tb_logins` ADD FOREIGN KEY (`id_marca`) REFERENCES `tb_marcas` (`id
 ALTER TABLE `tb_inscricoes` ADD FOREIGN KEY (`id_colaborador`) REFERENCES `tb_colaboradores` (`id_colaborador`);
 
 ALTER TABLE `tb_inscricoes` ADD FOREIGN KEY (`id_treinamento`) REFERENCES `tb_treinamentos` (`id_treinamento`);
+
+ALTER TABLE `tb_inscricoes` ADD FOREIGN KEY (`id_responsavel`) REFERENCES `tb_responsaveis` (`id`);

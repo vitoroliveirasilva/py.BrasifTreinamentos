@@ -24,3 +24,10 @@ class Empresa(db.Model):
             filial=form.filial.data,
             status=form.status.data
         )
+    
+    # Método para atualizar a empresa existente a partir do formulário
+    def atualizar_empresa(self, form):
+        self.nome_empresa = form.nome_empresa.data
+        self.filial = form.filial.data
+        self.status = form.status.data
+        return self

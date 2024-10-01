@@ -22,5 +22,15 @@ class Treinamento(db.Model):
         return cls(
             id_marca=form.id_marca.data,
             treinamento=form.treinamento.data,
-            descricao=form.descricao.data
+            descricao=form.descricao.data,
+            status=form.status.data
         )
+
+    # Método para atualizar o treinamento existente a partir do formulário
+    def atualizar_treinamento(self, form):
+        self.id_marca = form.id_marca.data
+        self.treinamento = form.treinamento.data
+        self.descricao = form.descricao.data
+        self.status = form.status.data
+        self.data_alteracao = datetime.utcnow()
+        return self

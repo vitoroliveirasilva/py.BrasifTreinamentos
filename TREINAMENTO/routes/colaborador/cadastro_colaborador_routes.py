@@ -1,14 +1,16 @@
-from flask import render_template, redirect, url_for, flash, session
+from flask import render_template, redirect, url_for, flash
 from TREINAMENTO import app, db
+from flask_login import login_required, current_user
 from TREINAMENTO.forms.colaborador_forms import ColaboradorForm
 from TREINAMENTO.models import Colaborador, Empresa
 
 @app.route("/cadastro/colaborador", methods=["GET", "POST"])
+@login_required
 def cadastro_colaborador():
     form = ColaboradorForm()
-    
-    # ID do responsável na sessão
-    id_responsavel = session.get('user_id')
+
+    id_responsavel = current_user.id
+    print(id_responsavel)
 
     empresas = Empresa.query.all()
     form.id_empresa.choices = [(empresa.id_empresa, empresa.nome_empresa) for empresa in empresas]

@@ -1,9 +1,12 @@
+Aqui está a documentação completa atualizada, incorporando as novas informações e comentários conforme solicitado:
+
 ## Estrutura de Arquivos
 
 A divisão dos modelos por arquivos visa facilitar a organização. O projeto está estruturado da seguinte maneira:
 
 ```
 /models
+  ├── enum_filiais.py
   ├── tb_responsaveis.py
   ├── tb_tipos.py
   ├── tb_marcas.py
@@ -33,7 +36,7 @@ Armazena informações dos responsáveis pelos colaboradores.
   - `permissao`: Define se o responsável tem permissões administrativas.
   - `data_criacao`: Data de criação do registro.
   - `data_alteracao`: Data da última alteração.
-  - `status`: Indica se o registro está ativo ou inativo.
+  - `status`: Indica se o registro está ativo.
 
 - **Relacionamento:**
   - Um responsável pode estar associado a vários colaboradores.
@@ -45,7 +48,31 @@ class Responsavel(db.Model):
 
 ---
 
-### 2. **Tipo** (`tb_tipos.py`)
+### 2. **Filiais** (`enum_filiais.py`)
+
+**Tabela: `enum_filiais`**
+
+Armazena as filiais com valores fixos.
+
+- **Valores possíveis:**
+  - Jundiaí
+  - Belo Horizonte
+  - Ribeirão Preto
+  - Cuiabá
+  - Rio de Janeiro
+  - Tocantins
+  - Brasília
+  - Goiânia
+  - Curitiba
+
+```python
+class Filiais(Enum):
+    # Definição dos valores da enumeração
+```
+
+---
+
+### 3. **Tipo** (`tb_tipos.py`)
 
 **Tabela: `tb_tipos`**
 
@@ -68,7 +95,7 @@ class Tipo(db.Model):
 
 ---
 
-### 3. **Marca** (`tb_marcas.py`)
+### 4. **Marca** (`tb_marcas.py`)
 
 **Tabela: `tb_marcas`**
 
@@ -92,7 +119,7 @@ class Marca(db.Model):
 
 ---
 
-### 4. **Treinamento** (`tb_treinamentos.py`)
+### 5. **Treinamento** (`tb_treinamentos.py`)
 
 **Tabela: `tb_treinamentos`**
 
@@ -117,7 +144,7 @@ class Treinamento(db.Model):
 
 ---
 
-### 5. **Empresa** (`tb_empresas.py`)
+### 6. **Empresa** (`tb_empresas.py`)
 
 **Tabela: `tb_empresas`**
 
@@ -140,7 +167,7 @@ class Empresa(db.Model):
 
 ---
 
-### 6. **Colaborador** (`tb_colaboradores.py`)
+### 7. **Colaborador** (`tb_colaboradores.py`)
 
 **Tabela: `tb_colaboradores`**
 
@@ -168,7 +195,7 @@ class Colaborador(db.Model):
 
 ---
 
-### 7. **Login** (`tb_logins.py`)
+### 8. **Login** (`tb_logins.py`)
 
 **Tabela: `tb_logins`**
 
@@ -190,7 +217,7 @@ class Login(db.Model):
 
 ---
 
-### 8. **Inscrição** (`tb_inscricoes.py`)
+### 9. **Inscrição** (`tb_inscricoes.py`)
 
 **Tabela: `tb_inscricoes`**
 
@@ -212,11 +239,12 @@ class Inscricao(db.Model):
 
 ---
 
-### 9. **Inicialização dos Models** (`__init__.py`)
+### 10. **Inicialização dos Models** (`__init__.py`)
 
 Este arquivo é responsável por inicializar os modelos no banco de dados e conectá-los ao aplicativo Flask.
 
 ```python
+from .enum_filiais import Filiais
 from .tb_responsaveis import Responsavel
 from .tb_tipos import Tipo
 from .tb_marcas import Marca
@@ -233,4 +261,4 @@ from .tb_inscricoes import Inscricao
 
 - Cada model tem um método `__repr__` que permite exibir uma representação legível da instância.
 - As colunas `data_criacao`, `data_alteracao` e `status` foram adicionadas em tabelas apropriadas para permitir auditoria e controle de estado.
-- As relações entre tabelas são mapeadas com `ForeignKey` e `relationship`.
+- As relações entre tabelas são mapeadas com `ForeignKey` e `relationship`. 

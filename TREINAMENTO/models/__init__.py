@@ -1,3 +1,4 @@
+from .enum_filiais import Filiais
 from .tb_responsaveis import Responsavel
 from .tb_tipos import Tipo
 from .tb_marcas import Marca

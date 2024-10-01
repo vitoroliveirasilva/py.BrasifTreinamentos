@@ -15,3 +15,12 @@ class Empresa(db.Model):
 
     def __repr__(self):
         return f"<Empresa(id_empresa={self.id_empresa}, nome_empresa='{self.nome_empresa}', filial='{self.filial}')>"
+    
+    # Método para criar uma empresa a partir do formulário
+    @classmethod
+    def cadastro_empresa(cls, form):
+        return cls(
+            nome_empresa=form.nome_empresa.data,
+            filial=form.filial.data,
+            status=form.status.data
+        )

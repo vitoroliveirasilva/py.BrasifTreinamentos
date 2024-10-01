@@ -20,3 +20,15 @@ class Colaborador(db.Model):
 
     def __repr__(self):
         return f"<Colaborador(id_colaborador={self.id_colaborador}, nome='{self.nome}', email='{self.email}', filial='{self.filial}')>"
+    
+    # Método para criar um colaborador a partir do formulário
+    @classmethod
+    def cadastro_colaborador(cls, form):
+        return cls(
+            nome=form.nome.data,
+            email=form.email.data,
+            cargo=form.cargo.data,
+            id_empresa=form.id_empresa.data,
+            filial=form.filial.data,
+            status=form.status.data
+        )

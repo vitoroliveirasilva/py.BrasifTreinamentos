@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% set title = "Cadastrar/Editar Colaborador" %}
+
+{% block content %}
+<div class="container-home">
+    <h1 class="text-center">Cadastrar/Editar Colaborador</h1>
+    
+    <!-- Seção para exibir mensagens flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        
+        <div class="form-group">
+            {{ form.nome.label(class="form-label") }}
+            {{ form.nome(class="form-control", placeholder="Insira o nome") }}
+            {% for error in form.nome.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+        
+        <div class="form-group">
+            {{ form.email.label(class="form-label") }}
+            {{ form.email(class="form-control", placeholder="Insira o e-mail") }}
+            {% for error in form.email.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.cargo.label(class="form-label") }}
+            {{ form.cargo(class="form-control", placeholder="Insira o cargo") }}
+            {% for error in form.cargo.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.id_empresa.label(class="form-label") }}
+            {{ form.id_empresa(class="form-control") }}
+            {% for error in form.id_empresa.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>        
+
+        <div class="form-group">
+            {{ form.filial.label(class="form-label") }}
+            {{ form.filial(class="form-control") }}
+            {% for error in form.filial.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.status.label(class="form-label") }}
+            {{ form.status() }} Ativo
+            {% for error in form.status.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+        
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+</div>
+{% endblock %}

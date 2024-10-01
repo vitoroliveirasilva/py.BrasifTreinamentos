@@ -1,0 +1,2 @@
+from .colaborador.cadastro_colaborador_routes import cadastro_colaborador
+from .empresa.cadastro_empresa_routes import cadastro_empresa

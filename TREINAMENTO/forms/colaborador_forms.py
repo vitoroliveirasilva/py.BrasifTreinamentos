@@ -10,4 +10,4 @@ class ColaboradorForm(FlaskForm):
     filial = SelectField('Filial', choices=[(f.name, f.value) for f in Filiais], validators=[DataRequired()])
     status = BooleanField('Ativo', default=True)
     id_empresa = SelectField('Empresa', coerce=int, validators=[DataRequired()])
-    submit = SubmitField('Salvar Alterações')
+    submit = SubmitField('Salvar')

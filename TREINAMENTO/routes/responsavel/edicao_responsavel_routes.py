@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash
 from flask_login import login_required
 from TREINAMENTO import app, db
-from TREINAMENTO.forms.responsavel.edicao_responsavel_forms import ResponsavelForm
+from TREINAMENTO.forms.responsavel_forms import ResponsavelForm
 from TREINAMENTO.models import Responsavel
 
 @app.route("/editar/responsavel/<int:id>", methods=["GET", "POST"])

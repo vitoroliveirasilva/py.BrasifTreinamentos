@@ -7,4 +7,4 @@ class LoginForm(FlaskForm):
     id_colaborador = SelectField('Colaborador', coerce=int, validators=[DataRequired()])
     id_marca = SelectField('Marca', coerce=int, validators=[DataRequired()])
     status = BooleanField('Ativo', default=True)
-    submit = SubmitField('Salvar Alterações')
+    submit = SubmitField('Salvar')

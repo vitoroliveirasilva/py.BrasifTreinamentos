@@ -6,4 +6,4 @@ class MarcaForm(FlaskForm):
     nome = StringField('Nome', validators=[DataRequired(), Length(max=100)])
     id_tipo = SelectField('Tipo', coerce=int, validators=[DataRequired()])
     status = BooleanField('Ativo', default=True)
-    submit = SubmitField('Cadastrar marca')
+    submit = SubmitField('Salvar')

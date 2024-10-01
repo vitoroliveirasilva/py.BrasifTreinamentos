@@ -5,4 +5,4 @@ from wtforms.validators import DataRequired, Length
 class TipoForm(FlaskForm):
     nome = StringField('Nome', validators=[DataRequired(), Length(max=100)])
     status = BooleanField('Ativo', default=True)
-    submit = SubmitField('Cadastrar tipo')
+    submit = SubmitField('Salvar')

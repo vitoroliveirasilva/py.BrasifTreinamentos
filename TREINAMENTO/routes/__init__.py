@@ -27,3 +27,6 @@ from .treinamento.edicao_treinamento_routes import editar_treinamento
 
 # Responsável
 from .responsavel.edicao_responsavel_routes import editar_responsavel
+
+# Inscrição
+from .operacoes.cadastro_inscricao_routes import cadastro_inscricao

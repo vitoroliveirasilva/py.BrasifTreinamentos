@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% set title = "Editar Login" %}
+
+{% block content %}
+<div class="container-home">
+    <h1 class="text-center">Editar Login</h1>
+    
+    <!-- Seção para exibir mensagens flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        
+        <div class="form-group">
+            {{ form.usuario.label(class="form-label") }}
+            {{ form.usuario(class="form-control", placeholder="Insira o Usuário") }}
+            {% for error in form.usuario.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.id_colaborador.label(class="form-label") }}
+            {{ form.id_colaborador(class="form-control") }}
+            {% for error in form.id_colaborador.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+        
+        <div class="form-group">
+            {{ form.id_marca.label(class="form-label") }}
+            {{ form.id_marca(class="form-control") }}
+            {% for error in form.id_marca.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+        
+        <div class="form-group">
+            {{ form.status.label(class="form-label") }}
+            {{ form.status() }} Ativo
+            {% for error in form.status.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+</div>
+{% endblock %}

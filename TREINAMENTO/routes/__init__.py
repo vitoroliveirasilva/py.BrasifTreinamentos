@@ -10,6 +10,7 @@ from .empresa.edicao_empresa_routes import editar_empresa
 
 # Login
 from .login.cadastro_login_routes import cadastro_login
+from .login.edicao_login_routes import editar_login
 
 # Marca
 from .marca.cadastro_marca_routes import cadastro_marca

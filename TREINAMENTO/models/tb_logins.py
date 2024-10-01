@@ -23,3 +23,11 @@ class Login(db.Model):
             id_marca=form.id_marca.data,
             status=form.status.data
         )
+    
+    # Método para atualizar o login existente a partir do formulário
+    def atualizar_login(self, form):
+        self.usuario = form.usuario.data
+        self.id_colaborador = form.id_colaborador.data
+        self.id_marca = form.id_marca.data
+        self.status = form.status.data
+        return self

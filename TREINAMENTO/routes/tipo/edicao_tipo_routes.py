@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash
 from flask_login import login_required
 from TREINAMENTO import app, db
-from TREINAMENTO.forms.tipo.edicao_tipo_forms import TipoForm
+from TREINAMENTO.forms.tipo_forms import TipoForm
 from TREINAMENTO.models import Tipo
 
 @app.route("/editar/tipo/<int:id>", methods=["GET", "POST"])

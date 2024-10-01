@@ -1,6 +1,6 @@
 from TREINAMENTO import db
 from datetime import datetime
-from enum_filiais import Filiais
+from .enum_filiais import Filiais
 
 class Empresa(db.Model):
     __tablename__ = 'tb_empresas'

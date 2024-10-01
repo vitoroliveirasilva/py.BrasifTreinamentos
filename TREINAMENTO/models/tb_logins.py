@@ -14,3 +14,12 @@ class Login(db.Model):
     def __repr__(self):
         return f"<Login(id_login={self.id_login}, usuario='{self.usuario}', id_colaborador={self.id_colaborador}, id_marca={self.id_marca})>"
     
+    # Método para criar um login a partir do formulário
+    @classmethod
+    def cadastro_login(cls, form):
+        return cls(
+            usuario=form.usuario.data,
+            id_colaborador=form.id_colaborador.data,
+            id_marca=form.id_marca.data,
+            status=form.status.data
+        )

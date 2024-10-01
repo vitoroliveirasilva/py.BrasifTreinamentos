@@ -14,3 +14,10 @@ class Tipo(db.Model):
     def __repr__(self):
         return f"<Tipo(id_tipo={self.id_tipo}, nome='{self.nome}', status={self.status})>"
     
+    # Método para criar um tipo a partir do formulário
+    @classmethod
+    def cadastro_tipo(cls, form):
+        return cls(
+            nome=form.nome.data,
+            status=form.status.data
+        )

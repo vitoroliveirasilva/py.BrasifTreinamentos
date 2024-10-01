@@ -16,3 +16,11 @@ class Marca(db.Model):
     def __repr__(self):
         return f"<Marca(id_marca={self.id_marca}, nome='{self.nome}', id_tipo={self.id_tipo}, status={self.status})>"
     
+    # Método para criar uma marca a partir do formulário
+    @classmethod
+    def cadastro_marca(cls, form):
+        return cls(
+            nome=form.nome.data,
+            id_tipo=form.id_tipo.data,
+            status=form.status.data
+        )

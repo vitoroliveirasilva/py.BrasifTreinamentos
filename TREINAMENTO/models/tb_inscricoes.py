@@ -7,7 +7,7 @@ class Inscricao(db.Model):
     id_colaborador = db.Column(db.Integer, db.ForeignKey('tb_colaboradores.id_colaborador'), nullable=False)
     id_treinamento = db.Column(db.Integer, db.ForeignKey('tb_treinamentos.id_treinamento'), nullable=False)
     data_inscricao = db.Column(db.Date, nullable=False)
-    status = db.Column(db.String(50), nullable=False)
+    status = db.Column(db.Enum('Pendente', 'Confirmada', 'Cancelada', name='enum_status'), nullable=False)
     data_criacao = db.Column(db.TIMESTAMP, default=datetime.utcnow)
     data_alteracao = db.Column(db.TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
 

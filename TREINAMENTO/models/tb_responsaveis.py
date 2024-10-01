@@ -16,4 +16,24 @@ class Responsavel(db.Model):
 
     def __repr__(self):
         return f"<Responsavel(id={self.id}, nome='{self.nome}', email='{self.email}')>"
-    
+
+
+    # Métodos exigidos pelo Flask-Login
+    @property
+    def is_active(self):
+        # Verifica se o usuário está ativo
+        return self.status
+
+    @property
+    def is_authenticated(self):
+        # Verifica se o usuário está autenticado
+        return True
+
+    @property
+    def is_anonymous(self):
+        # Verifica se o usuário é anônimo
+        return False
+
+    def get_id(self):
+        # Retorna o ID do usuário
+        return str(self.id)    

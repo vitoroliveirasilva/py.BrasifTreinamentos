@@ -12,6 +12,13 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SECRET_KEY = os.getenv('SECRET_KEY')
     
+    # Configuração da autenticação
+    CLIENT_ID = os.getenv('CLIENT_ID')
+    CLIENT_SECRET = os.getenv('CLIENT_SECRET')
+    AUTHORITY = f"https://login.microsoftonline.com/{os.getenv('TENANT_ID')}"
+    REDIRECT_PATH = "/getAToken"
+    SCOPE = ["User.Read"]
+    
     # Método para verificação das variáveis críticas
     @staticmethod
     def validacao_config():

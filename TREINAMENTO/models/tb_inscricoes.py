@@ -17,11 +17,14 @@ class Inscricao(db.Model):
         return f"<Inscricao(id_inscricao={self.id_inscricao}, status='{self.status}', id_colaborador={self.id_colaborador}, id_treinamento={self.id_treinamento}, id_responsavel={self.id_responsavel})>"
 
     @staticmethod
-    def cadastro_inscricao(form, id_responsavel):
+    def cadastro_inscricao(form, id_responsavel, status=None):
+        if not status:
+            status = 'Pendente'
+
         return Inscricao(
             id_colaborador=form.id_colaborador.data,
             id_treinamento=form.id_treinamento.data,
             id_responsavel=id_responsavel,
             data_inscricao=datetime.utcnow(),
-            status='Pendente'
+            status=status
         )

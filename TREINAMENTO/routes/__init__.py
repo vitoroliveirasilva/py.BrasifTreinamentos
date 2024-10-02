@@ -1,3 +1,4 @@
+from .menu_routes import menu_bp
 from .autenticacao.autenticacao_routes import autenticacao_bp
 from .colaborador.cadastro_colaborador_routes import colaborador_bp
 from .empresa.cadastro_empresa_routes import empresa_bp
@@ -9,6 +10,7 @@ from .tipo.cadastro_tipo_routes import tipo_bp
 from .treinamento.cadastro_treinamento_routes import treinamento_bp
 
 def register_blueprint(app):
+    app.register_blueprint(menu_bp)
     app.register_blueprint(autenticacao_bp)
     app.register_blueprint(colaborador_bp)
     app.register_blueprint(empresa_bp)

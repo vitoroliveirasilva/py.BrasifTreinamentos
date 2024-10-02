@@ -46,7 +46,7 @@ def get_token():
 
         # Faz login do usuário
         login_user(user)
-        return redirect(url_for("empresa.cadastro_empresa"))
+        return redirect(url_for("menu.menu"))
     else:
         error = result.get("error")
         error_description = result.get("error_description")

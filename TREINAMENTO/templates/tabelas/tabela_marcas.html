@@ -16,13 +16,13 @@
                 </tr>
             </thead>
             <tbody>
-                {% for marca in marcas.items %}
+                {% for tipo, marca in marcas.items %}
                 <tr>
-                    <td>{{ marca.Tipo.nome }}</td>
-                    <td>{{ marca.Marca.nome }}</td>
+                    <td>{{ tipo.nome }}</td>
+                    <td>{{ marca.nome }}</td>
                 </tr>
                 {% endfor %}
-            </tbody>
+            </tbody>            
         </table>
     </div>
     <nav aria-label="Page navigation example">

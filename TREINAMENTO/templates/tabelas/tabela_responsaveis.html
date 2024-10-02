@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% set title = "Responsaveis" %}
+
+{% block content %}
+<div class="container">
+
+    <h1 class="text-center">Responsaveis</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>ID_Azure</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for responsavel in responsaveis.items %}
+                <tr>
+                    <td>{{ responsavel.nome }}</td>
+                    <td>{{ responsavel.email }}</td>
+                    <td>{{ responsavel.id_azure_ad }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if responsaveis.has_prev %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.tabela_responsaveis', page=responsaveis.prev_num) }}">Anterior</a></li>
+            {% endif %}
+            <li class="page-item disabled"><a class="page-link" href="">Página {{ responsaveis.page }} de
+                    {{ responsaveis.pages }}</a></li>
+            {% if responsaveis.has_next %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.tabela_responsaveis', page=responsaveis.next_num) }}">Próxima</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

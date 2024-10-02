@@ -33,7 +33,7 @@
             <li class="page-item"><a class="page-link"
                     href="{{ url_for('tabela.tabela_treinamentos', page=treinamentos.prev_num) }}">Anterior</a></li>
             {% endif %}
-            <li class="page-item disabled"><a class="page-link" href="#">Página {{ treinamentos.page }} de
+            <li class="page-item disabled"><a class="page-link" href="">Página {{ treinamentos.page }} de
                     {{ treinamentos.pages }}</a></li>
             {% if treinamentos.has_next %}
             <li class="page-item"><a class="page-link"

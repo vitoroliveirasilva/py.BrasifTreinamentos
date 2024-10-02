@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% set title = "Marcas" %}
+
+{% block content %}
+<div class="container">
+
+    <h1 class="text-center">Marcas</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Marca</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for marca in marcas.items %}
+                <tr>
+                    <td>{{ marca.Tipo.nome }}</td>
+                    <td>{{ marca.Marca.nome }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if marcas.has_prev %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.tabela_marcas', page=marcas.prev_num) }}">Anterior</a></li>
+            {% endif %}
+            <li class="page-item disabled"><a class="page-link" href="">Página {{ marcas.page }} de
+                    {{ marcas.pages }}</a></li>
+            {% if marcas.has_next %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.tabela_marcas', page=marcas.next_num) }}">Próxima</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

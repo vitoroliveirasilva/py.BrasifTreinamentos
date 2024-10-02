@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% set title = "Treinamentos" %}
+
+{% block content %}
+<div class="container">
+
+    <h1 class="text-center">Treinamentos</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Marca</th>
+                    <th>Treinamento</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for treinamento in treinamentos.items %}
+                <tr>
+                    <td>{{ treinamento.Tipo.nome }}</td>
+                    <td>{{ treinamento.Marca.nome }}</td>
+                    <td>{{ treinamento.Treinamento.treinamento }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if treinamentos.has_prev %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.tabela_treinamentos', page=treinamentos.prev_num) }}">Anterior</a></li>
+            {% endif %}
+            <li class="page-item disabled"><a class="page-link" href="#">Página {{ treinamentos.page }} de
+                    {{ treinamentos.pages }}</a></li>
+            {% if treinamentos.has_next %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.tabela_treinamentos', page=treinamentos.next_num) }}">Próxima</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

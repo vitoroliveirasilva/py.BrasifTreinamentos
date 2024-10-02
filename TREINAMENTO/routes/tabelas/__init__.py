@@ -8,3 +8,4 @@ from .tabela_treinamentos_routes import *
 
 from .tabela_responsaveis_routes import *
 from .tabela_empresas_routes import *
+from .tabela_colaboradores_routes import *

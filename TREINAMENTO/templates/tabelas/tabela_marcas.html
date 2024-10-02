@@ -13,6 +13,7 @@
                 <tr>
                     <th>Tipo</th>
                     <th>Marca</th>
+                    <th>Logins</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,6 +21,11 @@
                 <tr>
                     <td>{{ tipo.nome }}</td>
                     <td>{{ marca.nome }}</td>
+                    <td>
+                        <a href="{{ url_for('tabela.logins_por_marca', id_marca=marca.id_marca) }}">
+                            Ver Logins
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>            

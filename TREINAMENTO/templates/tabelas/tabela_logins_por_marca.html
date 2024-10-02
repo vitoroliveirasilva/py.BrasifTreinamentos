@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% set title = "Logins por Marca" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Logins da Marca: {{ marca.nome }}</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Usuário</th>
+                    <th>Colaborador</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for login, colaborador in logins.items %}
+                <tr>
+                    <td>{{ login.usuario }}</td>
+                    <td>{{ colaborador.nome }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if logins.has_prev %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.logins_por_marca', id_marca=marca.id_marca, page=logins.prev_num) }}">Anterior</a></li>
+            {% endif %}
+            <li class="page-item disabled"><a class="page-link" href="">Página {{ logins.page }} de
+                    {{ logins.pages }}</a></li>
+            {% if logins.has_next %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.logins_por_marca', id_marca=marca.id_marca, page=logins.next_num) }}">Próxima</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

@@ -16,6 +16,7 @@
                     <th>Cargo</th>
                     <th>Filial</th>
                     <th>Empresa</th>
+                    <th>Logins</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +27,11 @@
                     <td>{{ colaborador.cargo }}</td>
                     <td>{{ colaborador.filial.name|capitalize }}</td>
                     <td>{{ colaborador.empresa.nome_empresa }}</td>
+                    <td>
+                        <a href="{{ url_for('tabela.logins_por_usuario', id_colaborador=colaborador.id_colaborador) }}">
+                            Ver Logins
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>                      

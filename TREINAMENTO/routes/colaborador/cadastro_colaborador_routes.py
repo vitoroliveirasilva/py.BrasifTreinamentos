@@ -1,10 +1,13 @@
-from flask import render_template, redirect, url_for, flash
-from TREINAMENTO import app, db
+from flask import Blueprint, render_template, redirect, url_for, flash
+from TREINAMENTO import db
 from flask_login import login_required, current_user
 from TREINAMENTO.forms.colaborador_forms import ColaboradorForm
 from TREINAMENTO.models import Colaborador, Empresa
 
-@app.route("/cadastro/colaborador", methods=["GET", "POST"])
+
+colaborador_bp = Blueprint("colaborador", __name__)
+
+@colaborador_bp.route("/cadastro/colaborador", methods=["GET", "POST"])
 @login_required
 def cadastro_colaborador():
     form = ColaboradorForm()
@@ -20,6 +23,6 @@ def cadastro_colaborador():
         db.session.add(colaborador)
         db.session.commit()
         flash("Colaborador cadastrado com sucesso!", "success")
-        return redirect(url_for("cadastro_colaborador"))
+        return redirect(url_for("colaborador.cadastro_colaborador"))
 
     return render_template("/cadastro/cadastro_colaborador.html", form=form)

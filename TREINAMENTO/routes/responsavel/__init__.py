@@ -1,0 +1,1 @@
+from .edicao_responsavel_routes import responsavel_bp

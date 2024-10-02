@@ -1,10 +1,13 @@
-from flask import render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required
-from TREINAMENTO import app, db
+from TREINAMENTO import db
 from TREINAMENTO.forms.colaborador_forms import ColaboradorForm
 from TREINAMENTO.models import Colaborador, Empresa
 
-@app.route("/editar/colaborador/<int:id>", methods=["GET", "POST"])
+
+colaborador_bp = Blueprint("colaborador", __name__)
+
+@colaborador_bp.route("/editar/colaborador/<int:id>", methods=["GET", "POST"])
 @login_required
 def editar_colaborador(id):
     colaborador = Colaborador.query.get_or_404(id)
@@ -17,6 +20,6 @@ def editar_colaborador(id):
         Colaborador.atualizar_colaborador(colaborador, form)
         db.session.commit()
         flash("Colaborador atualizado com sucesso!", "success")
-        return redirect(url_for("cadastro_colaborador"))
+        return redirect(url_for("colaborador.cadastro_colaborador"))
 
     return render_template("/edicao/edicao_colaborador.html", form=form, colaborador=colaborador)

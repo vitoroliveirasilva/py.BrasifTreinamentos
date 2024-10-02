@@ -1,0 +1,2 @@
+from .cadastro_treinamento_routes import treinamento_bp
+from .edicao_treinamento_routes import treinamento_bp

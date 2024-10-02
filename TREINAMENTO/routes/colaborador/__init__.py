@@ -1,0 +1,2 @@
+from .cadastro_colaborador_routes import colaborador_bp
+from .edicao_colaborador_routes import colaborador_bp

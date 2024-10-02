@@ -1,10 +1,13 @@
-from flask import render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required
-from TREINAMENTO import app, db
+from TREINAMENTO import db
 from TREINAMENTO.forms.login_forms import LoginForm
 from TREINAMENTO.models import Login, Colaborador, Marca
 
-@app.route("/editar/login/<int:id>", methods=["GET", "POST"])
+
+login_bp = Blueprint("login", __name__)
+
+@login_bp.route("/editar/login/<int:id>", methods=["GET", "POST"])
 @login_required
 def editar_login(id):
     login = Login.query.get_or_404(id)
@@ -20,6 +23,6 @@ def editar_login(id):
         Login.atualizar_login(login, form)
         db.session.commit()
         flash("Login atualizado com sucesso!", "success")
-        return redirect(url_for("cadastro_login"))
+        return redirect(url_for("login.cadastro_login"))
 
     return render_template("/edicao/edicao_login.html", form=form, login=login)

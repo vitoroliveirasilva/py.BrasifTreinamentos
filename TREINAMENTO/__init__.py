@@ -18,7 +18,6 @@ csrf = CSRFProtect()
 def criacao_app():
     # Configura a pasta static para importações como CSS e JS
     app = Flask(__name__, static_folder='./static')
-
     # Configuração do app
     app.config.from_object(Config)
 
@@ -36,11 +35,12 @@ def criacao_app():
     def load_user(user_id):
         return Responsavel.query.get(int(user_id))
 
+    # Registrar blueprints
+    from TREINAMENTO.routes import register_blueprint
+    register_blueprint(app)
+
     return app
+
 
 # Criação do objeto app
 app = criacao_app()
-
-# Importação das rotas após a inicialização do aplicativo
-with app.app_context():
-    from TREINAMENTO import routes

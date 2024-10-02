@@ -1,0 +1,1 @@
+from .autenticacao_routes import autenticacao_bp

@@ -1,22 +1,23 @@
-from flask import render_template, redirect, url_for, request, session
-from TREINAMENTO import app, login_manager, db
+from flask import Blueprint, render_template, redirect, url_for, request, session
+from TREINAMENTO import login_manager, db
 from TREINAMENTO.models import Responsavel
 from flask_login import login_required, logout_user, login_user
 from TREINAMENTO.utils import autenticacao_URL, autenticacao_token
 
 
-@app.route('/login', methods=['GET', 'POST'])
+autenticacao_bp = Blueprint("autenticacao", __name__)
+
+@autenticacao_bp.route("/login", methods=["GET", "POST"])
 def login():
-    # Gera a URL de autorização para autenticação
-    auth_url = autenticacao_URL()
     # Renderiza a página de login, passando a URL de autorização como contexto
-    return render_template('/autenticacao/autenticacao_login.html', auth_url=auth_url)
+    # "autenticacao_URL()" Gera a URL de autorização para autenticação
+    return render_template("/autenticacao/autenticacao_login.html", auth_url=autenticacao_URL())
 
 
 # Rota para receber o token de acesso após a autenticação
-@app.route("/getAToken")
+@autenticacao_bp.route("/getAToken")
 def get_token():
-    code = request.args.get('code')
+    code = request.args.get("code")
     if not code:
         return "No authorization code found", 400
 
@@ -45,7 +46,7 @@ def get_token():
 
         # Faz login do usuário
         login_user(user)
-        return redirect("/cadastro/empresa")
+        return redirect(url_for("empresa.cadastro_empresa"))
     else:
         error = result.get("error")
         error_description = result.get("error_description")
@@ -53,15 +54,15 @@ def get_token():
 
 
 # Logout
-@app.route('/logout')
+@autenticacao_bp.route("/logout")
 @login_required
 def logout():
     logout_user()
     session.clear()
-    return redirect('/login')
+    return redirect(url_for("autenticacao.login"))
 
 
 # Usuário não autenticado
 @login_manager.unauthorized_handler
 def unauthorized():
-    return redirect('/login')
+    return redirect(url_for("autenticacao.login", _external=True))

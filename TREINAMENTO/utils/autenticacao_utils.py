@@ -8,7 +8,7 @@ def autenticacao_URL():
     client = ConfidentialClientApplication(
         Config.CLIENT_ID, authority=Config.AUTHORITY, client_credential=Config.CLIENT_SECRET
     )
-    return client.get_authorization_request_url(Config.SCOPE, redirect_uri=url_for('get_token', _external=True))
+    return client.get_authorization_request_url(Config.SCOPE, redirect_uri=url_for('autenticacao.get_token', _external=True))
 
 
 # Adquire um token de acesso usando o código de autorização fornecido.
@@ -19,5 +19,5 @@ def autenticacao_token(code):
     )
 
     return client.acquire_token_by_authorization_code(
-        code, scopes=Config.SCOPE, redirect_uri=url_for('get_token', _external=True)
+        code, scopes=Config.SCOPE, redirect_uri=url_for('autenticacao.get_token', _external=True)
     )

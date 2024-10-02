@@ -1,10 +1,13 @@
-from flask import render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required
-from TREINAMENTO import app, db
+from TREINAMENTO import db
 from TREINAMENTO.forms.login_forms import LoginForm
 from TREINAMENTO.models import Login, Colaborador, Marca
 
-@app.route("/cadastro/login", methods=["GET", "POST"])
+
+login_bp = Blueprint("login", __name__)
+
+@login_bp.route("/cadastro/login", methods=["GET", "POST"])
 @login_required
 def cadastro_login():
     form = LoginForm()
@@ -20,6 +23,6 @@ def cadastro_login():
         db.session.add(novo_login)
         db.session.commit()
         flash("Login cadastrado com sucesso!", "success")
-        return redirect(url_for("cadastro_login"))
+        return redirect(url_for("login.cadastro_login"))
 
     return render_template("/cadastro/cadastro_login.html", form=form)

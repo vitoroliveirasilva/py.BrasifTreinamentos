@@ -1,0 +1,2 @@
+from .cadastro_empresa_routes import empresa_bp
+from .edicao_empresa_routes import empresa_bp

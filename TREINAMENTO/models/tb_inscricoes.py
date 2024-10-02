@@ -22,6 +22,6 @@ class Inscricao(db.Model):
             id_colaborador=form.id_colaborador.data,
             id_treinamento=form.id_treinamento.data,
             id_responsavel=id_responsavel,
-            data_inscricao=form.data_inscricao.data,
-            status=form.status.data
+            data_inscricao=datetime.utcnow(),
+            status='Pendente'
         )

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% set title = "Empresas" %}
+
+{% block content %}
+<div class="container">
+
+    <h1 class="text-center">Empresas</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Filial</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for empresa in empresas.items %}
+                <tr>
+                    <td>{{ empresa.nome_empresa }}</td>
+                    <td>{{ empresa.filial.name|capitalize }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if empresas.has_prev %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.tabela_empresas', page=empresas.prev_num) }}">Anterior</a></li>
+            {% endif %}
+            <li class="page-item disabled"><a class="page-link" href="">Página {{ empresas.page }} de
+                    {{ empresas.pages }}</a></li>
+            {% if empresas.has_next %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.tabela_empresas', page=empresas.next_num) }}">Próxima</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

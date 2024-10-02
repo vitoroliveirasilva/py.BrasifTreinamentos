@@ -1,11 +1,10 @@
-from flask import Blueprint, render_template, redirect, url_for, request, session
+from flask import render_template, redirect, url_for, request, session
 from TREINAMENTO import login_manager, db
 from TREINAMENTO.models import Responsavel
 from flask_login import login_required, logout_user, login_user
 from TREINAMENTO.utils import autenticacao_URL, autenticacao_token
+from . import autenticacao_bp
 
-
-autenticacao_bp = Blueprint("autenticacao", __name__)
 
 @autenticacao_bp.route("/login", methods=["GET", "POST"])
 def login():

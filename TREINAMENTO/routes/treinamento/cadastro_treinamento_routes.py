@@ -3,11 +3,10 @@ from flask_login import login_required
 from TREINAMENTO import db
 from TREINAMENTO.forms.treinamento_forms import TreinamentoForm
 from TREINAMENTO.models import Treinamento, Marca
+from . import treinamento_bp
 
 
-treinamento_bp = Blueprint("treinamento", __name__)
-
-@treinamento_bp.route("/cadastro/treinamento", methods=["GET", "POST"])
+@treinamento_bp.route("/cadastro", methods=["GET", "POST"])
 @login_required
 def cadastro_treinamento():
     form = TreinamentoForm()

@@ -1,13 +1,12 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash
 from flask_login import login_required
 from TREINAMENTO import db
 from TREINAMENTO.forms.marca_forms import MarcaForm
 from TREINAMENTO.models import Marca, Tipo
+from . import marca_bp
 
 
-marca_bp = Blueprint("marca", __name__)
-
-@marca_bp.route("/cadastro/marca", methods=["GET", "POST"])
+@marca_bp.route("/cadastro", methods=["GET", "POST"])
 @login_required
 def cadastro_marca():
     form = MarcaForm()

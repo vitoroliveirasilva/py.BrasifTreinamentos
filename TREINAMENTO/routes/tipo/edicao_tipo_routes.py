@@ -1,13 +1,12 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash
 from flask_login import login_required
 from TREINAMENTO import db
 from TREINAMENTO.forms.tipo_forms import TipoForm
 from TREINAMENTO.models import Tipo
+from . import tipo_bp
 
 
-tipo_bp = Blueprint("tipo", __name__)
-
-@tipo_bp.route("/editar/tipo/<int:id>", methods=["GET", "POST"])
+@tipo_bp.route("/editar/<int:id>", methods=["GET", "POST"])
 @login_required
 def editar_tipo(id):
     tipo = Tipo.query.get_or_404(id)

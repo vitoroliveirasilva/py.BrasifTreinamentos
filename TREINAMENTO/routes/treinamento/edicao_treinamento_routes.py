@@ -3,11 +3,10 @@ from flask_login import login_required
 from TREINAMENTO import db
 from TREINAMENTO.forms.treinamento_forms import TreinamentoForm
 from TREINAMENTO.models import Treinamento, Marca
+from . import treinamento_bp
 
 
-treinamento_bp = Blueprint("treinamento", __name__)
-
-@treinamento_bp.route("/editar/treinamento/<int:id>", methods=["GET", "POST"])
+@treinamento_bp.route("/editar/<int:id>", methods=["GET", "POST"])
 @login_required
 def editar_treinamento(id):
     treinamento = Treinamento.query.get_or_404(id)

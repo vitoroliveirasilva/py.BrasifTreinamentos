@@ -1,13 +1,12 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash
 from flask_login import login_required
 from TREINAMENTO import db
 from TREINAMENTO.forms.empresa_forms import EmpresaForm
 from TREINAMENTO.models import Empresa
+from . import empresa_bp 
 
 
-empresa_bp = Blueprint("empresa", __name__)
-
-@empresa_bp.route("/editar/empresa/<int:id>", methods=["GET", "POST"])
+@empresa_bp.route("/editar/<int:id>", methods=["GET", "POST"])
 @login_required
 def editar_empresa(id):
     empresa = Empresa.query.get_or_404(id)

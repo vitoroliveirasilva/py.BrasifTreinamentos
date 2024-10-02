@@ -1,13 +1,12 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash
 from flask_login import login_required
 from TREINAMENTO import db
 from TREINAMENTO.forms.responsavel_forms import ResponsavelForm
 from TREINAMENTO.models import Responsavel
+from . import responsavel_bp
 
 
-responsavel_bp = Blueprint("responsavel", __name__)
-
-@responsavel_bp.route("/editar/responsavel/<int:id>", methods=["GET", "POST"])
+@responsavel_bp.route("/editar/<int:id>", methods=["GET", "POST"])
 @login_required
 def editar_responsavel(id):
     responsavel = Responsavel.query.get_or_404(id)

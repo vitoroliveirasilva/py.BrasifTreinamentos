@@ -1,1 +1,0 @@
-from .cadastro_inscricao_routes import operacoes_bp

@@ -23,11 +23,11 @@
                 {% for inscricao in inscricoes.items %}
                 <tr>
                     <td>{{ inscricao.colaborador.nome }}</td>
-                    <td>{{ inscricao.treinamento }}</td> <!-- Ajuste conforme sua modelagem -->
-                    <td>{{ inscricao.responsavel.nome }}</td> <!-- Aqui acessa o nome do responsável -->
-                    <td>{{ inscricao.data_inscricao }}</td>
+                    <td>{{ inscricao.treinamento.treinamento }}</td>
+                    <td>{{ inscricao.colaborador.responsavel.nome }}</td>
+                    <td>{{ inscricao.data_inscricao.strftime('%d/%m/%Y') }}</td>
                     <td>{{ inscricao.status }}</td>
-                    <td>{{ inscricao.colaborador.empresa.nome_empresa }}</td> <!-- Supondo que 'empresa' está relacionado corretamente -->
+                    <td>{{ inscricao.colaborador.empresa.nome_empresa }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -37,11 +37,12 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             {% if inscricoes.has_prev %}
-            <li class="page-item"><a class="page-link" href="{{ url_for('tabela.inscricoes_por_empresa', page=inscricoes.prev_num) }}">Anterior</a></li>
+            <a href="{{ url_for('tabela_bp.inscricoes_por_empresa', page=inscricoes.prev_num) }}">Anterior</a>
             {% endif %}
-            <li class="page-item disabled"><a class="page-link" href="">Página {{ inscricoes.page }} de {{ inscricoes.pages }}</a></li>
+            <li class="page-item disabled"><a class="page-link" href="">Página {{ inscricoes.page }} de
+                    {{ inscricoes.pages }}</a></li>
             {% if inscricoes.has_next %}
-            <li class="page-item"><a class="page-link" href="{{ url_for('tabela.inscricoes_por_empresa', page=inscricoes.next_num) }}">Próxima</a></li>
+            <a href="{{ url_for('tabela_bp.inscricoes_por_empresa', page=inscricoes.next_num) }}">Próximo</a>
             {% endif %}
         </ul>
     </nav>

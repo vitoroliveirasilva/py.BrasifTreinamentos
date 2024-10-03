@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% set title = "Inscrições para o Treinamento" %}
+
+{% block content %}
+<div class="container">
+
+    <h1 class="text-center">Inscrições para o Treinamento: {{ treinamento.treinamento }}</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome do Colaborador</th>
+                    <th>E-mail</th>
+                    <th>Filial</th>
+                    <th>Marca</th>
+                    <th>Responsável</th>
+                    <th>Status</th>
+                    <th>Data de Inscrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inscricao, colaborador, marca, responsavel in inscricoes.items %}
+                <tr>
+                    <td>{{ colaborador.nome }}</td>
+                    <td>{{ colaborador.email }}</td>
+                    <td>{{ colaborador.filial.name|capitalize }}</td>
+                    <td>{{ marca.nome }}</td>
+                    <td>{{ responsavel.nome }}</td>
+                    <td>{{ inscricao.status }}</td>
+                    <td>{{ inscricao.data_inscricao.strftime('%d/%m/%Y') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>                      
+        </table>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if inscricoes.has_prev %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.inscricoes_por_treinamento', id_treinamento=treinamento.id_treinamento, page=inscricoes.prev_num) }}">Anterior</a></li>
+            {% endif %}
+            <li class="page-item disabled"><a class="page-link" href="">Página {{ inscricoes.page }} de
+                    {{ inscricoes.pages }}</a></li>
+            {% if inscricoes.has_next %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.inscricoes_por_treinamento', id_treinamento=treinamento.id_treinamento, page=inscricoes.next_num) }}">Próxima</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

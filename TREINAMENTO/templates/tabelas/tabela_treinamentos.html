@@ -14,14 +14,20 @@
                     <th>Tipo</th>
                     <th>Marca</th>
                     <th>Treinamento</th>
+                    <th>Inscrições</th>
                 </tr>
             </thead>
             <tbody>
-                {% for treinamento in treinamentos.items %}
+                {% for treinamento, marca, tipo in treinamentos.items %}
                 <tr>
-                    <td>{{ treinamento.Tipo.nome }}</td>
-                    <td>{{ treinamento.Marca.nome }}</td>
-                    <td>{{ treinamento.Treinamento.treinamento }}</td>
+                    <td>{{ tipo.nome }}</td>
+                    <td>{{ marca.nome }}</td>
+                    <td>{{ treinamento.treinamento }}</td> 
+                    <td>
+                        <a href="{{ url_for('tabela.inscricoes_por_treinamento', id_treinamento=treinamento.id_treinamento) }}">
+                            Ver Inscrições
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

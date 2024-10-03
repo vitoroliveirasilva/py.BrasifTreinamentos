@@ -4,7 +4,6 @@ from .colaborador import colaborador_bp
 from .empresa import empresa_bp
 from .login import login_bp
 from .marca import marca_bp
-from .inscricao import inscricao_bp
 from .responsavel import responsavel_bp
 from .tipo import tipo_bp
 from .treinamento import treinamento_bp
@@ -17,7 +16,6 @@ def register_blueprint(app):
     app.register_blueprint(empresa_bp)
     app.register_blueprint(login_bp)
     app.register_blueprint(marca_bp)
-    app.register_blueprint(inscricao_bp)
     app.register_blueprint(responsavel_bp)
     app.register_blueprint(tipo_bp)
     app.register_blueprint(treinamento_bp)

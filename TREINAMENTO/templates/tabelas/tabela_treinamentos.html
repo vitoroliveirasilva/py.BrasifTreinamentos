@@ -14,6 +14,7 @@
                     <th>Tipo</th>
                     <th>Marca</th>
                     <th>Treinamento</th>
+                    <th>Editar</th>
                     <th>Inscrições</th>
                 </tr>
             </thead>
@@ -22,7 +23,12 @@
                 <tr>
                     <td>{{ tipo.nome }}</td>
                     <td>{{ marca.nome }}</td>
-                    <td>{{ treinamento.treinamento }}</td> 
+                    <td>{{ treinamento.treinamento }}</td>
+                    <td>
+                        <a href="{{ url_for('treinamento.editar_treinamento', id=treinamento.id_treinamento) }}">
+                            Editar
+                        </a>
+                    </td>
                     <td>
                         <a href="{{ url_for('tabela.inscricoes_por_treinamento', id_treinamento=treinamento.id_treinamento) }}">
                             Ver Inscrições

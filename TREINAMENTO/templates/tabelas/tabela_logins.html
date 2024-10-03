@@ -14,6 +14,7 @@
                     <th>User</th>
                     <th>Colaborador</th>
                     <th>Marca</th>
+                    <th>Editar</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,11 @@
                     <td>{{ login.usuario }}</td>
                     <td>{{ colaborador.nome }}</td>
                     <td>{{ marca.nome }}</td>
+                    <td>
+                        <a href="{{ url_for('login.editar_login', id=login.id_login) }}">
+                            Editar
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>            

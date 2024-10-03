@@ -13,6 +13,7 @@
                 <tr>
                     <th>Tipo</th>
                     <th>Marca</th>
+                    <th>Editar</th>
                     <th>Logins</th>
                 </tr>
             </thead>
@@ -21,6 +22,11 @@
                 <tr>
                     <td>{{ tipo.nome }}</td>
                     <td>{{ marca.nome }}</td>
+                    <td>
+                        <a href="{{ url_for('marca.editar_marca', id=marca.id_marca) }}">
+                            Editar
+                        </a>
+                    </td>
                     <td>
                         <a href="{{ url_for('tabela.logins_por_marca', id_marca=marca.id_marca) }}">
                             Ver Logins

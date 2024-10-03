@@ -16,6 +16,7 @@
                     <th>Cargo</th>
                     <th>Filial</th>
                     <th>Empresa</th>
+                    <th>Editar</th>
                     <th>Logins</th>
                     <th>Inscrições</th>
                 </tr>
@@ -28,6 +29,11 @@
                     <td>{{ colaborador.cargo }}</td>
                     <td>{{ colaborador.filial.name|capitalize }}</td>
                     <td>{{ colaborador.empresa.nome_empresa }}</td>
+                    <td>
+                        <a href="{{ url_for('colaborador.editar_colaborador', id=colaborador.id_colaborador) }}">
+                            Editar
+                        </a>
+                    </td>
                     <td>
                         <a href="{{ url_for('tabela.logins_por_colaborador', id_colaborador=colaborador.id_colaborador) }}">
                             Ver Logins

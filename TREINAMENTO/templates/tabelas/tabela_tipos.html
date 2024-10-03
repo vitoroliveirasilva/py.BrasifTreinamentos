@@ -12,12 +12,18 @@
             <thead>
                 <tr>
                     <th>Tipo</th>
+                    <th>Editar</th>
                 </tr>
             </thead>
             <tbody>
                 {% for tipo in tipos.items %}
                 <tr>
                     <td>{{ tipo.nome }}</td>
+                    <td>
+                        <a href="{{ url_for('tipo.editar_tipo', id=tipo.id_tipo) }}">
+                            Editar
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

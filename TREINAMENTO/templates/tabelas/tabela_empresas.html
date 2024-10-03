@@ -13,6 +13,7 @@
                 <tr>
                     <th>Nome</th>
                     <th>Filial</th>
+                    <th>Editar</th>
                     <th>Colaboradores</th>
                 </tr>
             </thead>
@@ -21,6 +22,11 @@
                 <tr>
                     <td>{{ empresa.nome_empresa }}</td>
                     <td>{{ empresa.filial.name|capitalize }}</td>
+                    <td>
+                        <a href="{{ url_for('empresa.editar_empresa', id=empresa.id_empresa) }}">
+                            Editar
+                        </a>
+                    </td>
                     <td>
                         <a href="{{ url_for('tabela.colaboradores_por_empresa', id_empresa=empresa.id_empresa) }}">
                             Ver Colaboradores

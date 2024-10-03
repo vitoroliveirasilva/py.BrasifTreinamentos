@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% set title = "Colaboradores por Responsável" %}
+
+{% block content %}
+<div class="container">
+
+    <h1 class="text-center">Colaboradores de {{ responsavel.nome }}</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Cargo</th>
+                    <th>Filial</th>
+                    <th>Empresa</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for colaborador in colaboradores.items %}
+                <tr>
+                    <td>{{ colaborador.nome }}</td>
+                    <td>{{ colaborador.email }}</td>
+                    <td>{{ colaborador.cargo }}</td>
+                    <td>{{ colaborador.filial.name|capitalize }}</td>
+                    <td>{{ colaborador.empresa.nome_empresa }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if colaboradores.has_prev %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('tabela.colaboradores_por_responsavel', id_responsavel=responsavel.id, page=colaboradores.prev_num) }}">Anterior</a></li>
+            {% endif %}
+            <li class="page-item disabled"><a class="page-link" href="">Página {{ colaboradores.page }} de {{ colaboradores.pages }}</a></li>
+            {% if colaboradores.has_next %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('tabela.colaboradores_por_responsavel', id_responsavel=responsavel.id, page=colaboradores.next_num) }}">Próxima</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

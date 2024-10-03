@@ -15,6 +15,7 @@
                     <th>E-mail</th>
                     <th>ID_Azure</th>
                     <th>Inscrições</th>
+                    <th>Colaboradores</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,11 @@
                             Ver Inscrições
                         </a>
                     </td>
+                    <td>
+                        <a href="{{ url_for('tabela.colaboradores_por_responsavel', id_responsavel=responsavel.id) }}">
+                            Ver Colaboradores
+                        </a>
+                    </td>                    
                 </tr>
                 {% endfor %}
             </tbody>

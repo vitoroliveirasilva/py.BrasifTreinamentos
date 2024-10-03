@@ -12,3 +12,5 @@ from .tabela_colaboradores_routes import *
 from .tabela_logins_routes import *
 
 from .associacoes import *
+
+from .registros import *

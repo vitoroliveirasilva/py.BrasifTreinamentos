@@ -4,6 +4,7 @@ from flask_login import login_required
 from TREINAMENTO.models import Login, Colaborador, Marca
 from .. import tabela_bp
 
+
 @tabela_bp.route('/logins/colaborador/<int:id_colaborador>')
 @login_required
 def logins_por_colaborador(id_colaborador):

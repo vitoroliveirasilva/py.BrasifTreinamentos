@@ -1,5 +1,5 @@
-from .logins_por_colaborador_routes import *
-from .logins_por_marca_routes import *
+from .logins_por_colaborador import *
+from .logins_por_marca import *
 
 from .inscricoes_por_colaborador import *
 from .inscricoes_por_responsavel import *

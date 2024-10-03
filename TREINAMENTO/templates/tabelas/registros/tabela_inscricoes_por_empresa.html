@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% set title = "Inscrições por Empresa" %}
+
+{% block content %}
+<div class="container">
+
+    <h1 class="text-center">Inscrições por Empresa</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome Colaborador</th>
+                    <th>Nome Treinamento</th>
+                    <th>Nome Responsável</th>
+                    <th>Data Inscrição</th>
+                    <th>Status</th>
+                    <th>Nome Empresa</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inscricao in inscricoes.items %}
+                <tr>
+                    <td>{{ inscricao.colaborador.nome }}</td>
+                    <td>{{ inscricao.treinamento }}</td> <!-- Ajuste conforme sua modelagem -->
+                    <td>{{ inscricao.responsavel.nome }}</td> <!-- Aqui acessa o nome do responsável -->
+                    <td>{{ inscricao.data_inscricao }}</td>
+                    <td>{{ inscricao.status }}</td>
+                    <td>{{ inscricao.colaborador.empresa.nome_empresa }}</td> <!-- Supondo que 'empresa' está relacionado corretamente -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if inscricoes.has_prev %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('tabela.inscricoes_por_empresa', page=inscricoes.prev_num) }}">Anterior</a></li>
+            {% endif %}
+            <li class="page-item disabled"><a class="page-link" href="">Página {{ inscricoes.page }} de {{ inscricoes.pages }}</a></li>
+            {% if inscricoes.has_next %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('tabela.inscricoes_por_empresa', page=inscricoes.next_num) }}">Próxima</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

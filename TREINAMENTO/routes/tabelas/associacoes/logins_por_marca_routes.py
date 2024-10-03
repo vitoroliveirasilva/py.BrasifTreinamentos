@@ -18,4 +18,4 @@ def logins_por_marca(id_marca):
 
     marca = Marca.query.get_or_404(id_marca)
     
-    return render_template('/tabelas/tabela_logins_por_marca.html', logins=logins, marca=marca)
+    return render_template('/tabelas/associacoes/tabela_logins_por_marca.html', logins=logins, marca=marca)

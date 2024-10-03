@@ -14,6 +14,7 @@
                     <th>Nome</th>
                     <th>E-mail</th>
                     <th>ID_Azure</th>
+                    <th>Inscrições</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,11 @@
                     <td>{{ responsavel.nome }}</td>
                     <td>{{ responsavel.email }}</td>
                     <td>{{ responsavel.id_azure_ad }}</td>
+                    <td>
+                        <a href="{{ url_for('tabela.inscricoes_por_responsavel', id_responsavel=responsavel.id) }}">
+                            Ver Inscrições
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

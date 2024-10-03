@@ -6,7 +6,7 @@ from .. import tabela_bp
 
 @tabela_bp.route('/logins/colaborador/<int:id_colaborador>')
 @login_required
-def logins_por_usuario(id_colaborador):
+def logins_por_colaborador(id_colaborador):
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 5, type=int)
 
@@ -18,4 +18,4 @@ def logins_por_usuario(id_colaborador):
 
     colaborador = Colaborador.query.get_or_404(id_colaborador)
     
-    return render_template('/tabelas/tabela_logins_por_usuario.html', logins=logins, colaborador=colaborador)
+    return render_template('/tabelas/associacoes/tabela_logins_por_colaborador.html', logins=logins, colaborador=colaborador)

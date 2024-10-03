@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% set title = "Inscrições por Colaborador" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Inscrições de {{ colaborador.nome }}</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Treinamento</th>
+                    <th>Marca</th>
+                    <th>Status</th>
+                    <th>Data de Inscrição</th>
+                    <th>Responsável</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inscricao, treinamento, marca, responsavel in inscricoes.items %}
+                <tr>
+                    <td>{{ treinamento.treinamento }}</td>
+                    <td>{{ marca.nome }}</td>
+                    <td>{{ inscricao.status }}</td>
+                    <td>{{ inscricao.data_inscricao.strftime('%d/%m/%Y') }}</td>
+                    <td>{{ responsavel.nome }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if inscricoes.has_prev %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.inscricoes_por_colaborador', id_colaborador=colaborador.id_colaborador, page=inscricoes.prev_num) }}">Anterior</a>
+            </li>
+            {% endif %}
+            <li class="page-item disabled"><a class="page-link" href="">Página {{ inscricoes.page }} de
+                    {{ inscricoes.pages }}</a></li>
+            {% if inscricoes.has_next %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.inscricoes_por_colaborador', id_colaborador=colaborador.id_colaborador, page=inscricoes.next_num) }}">Próxima</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

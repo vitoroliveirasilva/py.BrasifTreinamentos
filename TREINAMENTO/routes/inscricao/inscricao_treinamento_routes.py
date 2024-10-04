@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from TREINAMENTO import db
 from TREINAMENTO.forms.inscricao import InscricaoTreinamentoForm
-from TREINAMENTO.models import Inscricao, Tipo, Treinamento, Marca, Colaborador
+from TREINAMENTO.models import Inscricao, Tipo, Treinamento, Marca
 from . import inscricao_bp
 
 

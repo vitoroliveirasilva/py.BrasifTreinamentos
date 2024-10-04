@@ -16,6 +16,9 @@ $(document).ready(function () {
                     $('#marca-select').html(data).prop('disabled', false);
                     // Desabilita o dropdown de treinamentos até que uma marca seja selecionada
                     $('#treinamento-select').prop('disabled', true);
+                },
+                error: function () {
+                    alert("Erro ao carregar marcas.");
                 }
             });
         } else {
@@ -39,6 +42,9 @@ $(document).ready(function () {
                 success: function (data) {
                     // Atualiza o dropdown de treinamentos com as opções retornadas
                     $('#treinamento-select').html(data).prop('disabled', false);
+                },
+                error: function () {
+                    alert("Erro ao carregar treinamentos.");
                 }
             });
         } else {

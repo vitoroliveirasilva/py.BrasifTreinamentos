@@ -27,7 +27,9 @@
             {{ form.nome.label(class="form-label") }}
             {{ form.nome(class="form-control", placeholder="Insira o nome") }}
             {% for error in form.nome.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
+                    class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
             {% endfor %}
         </div>
         
@@ -35,7 +37,9 @@
             {{ form.email.label(class="form-label") }}
             {{ form.email(class="form-control", placeholder="Insira o e-mail") }}
             {% for error in form.email.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
+                    class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
             {% endfor %}
         </div>
 
@@ -43,31 +47,39 @@
             {{ form.cargo.label(class="form-label") }}
             {{ form.cargo(class="form-control", placeholder="Insira o cargo") }}
             {% for error in form.cargo.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
+                    class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.filial.label(class="form-label") }}
+            {{ form.filial(class="form-control", id="filial-select") }}
+            {% for error in form.filial.errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
+                    class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
             {% endfor %}
         </div>
 
         <div class="form-group">
             {{ form.id_empresa.label(class="form-label") }}
-            {{ form.id_empresa(class="form-control") }}
+            {{ form.id_empresa(class="form-control", id="empresa-select", disabled=True) }}
             {% for error in form.id_empresa.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
+                    class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
             {% endfor %}
         </div>        
-
-        <div class="form-group">
-            {{ form.filial.label(class="form-label") }}
-            {{ form.filial(class="form-control") }}
-            {% for error in form.filial.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
-            {% endfor %}
-        </div>
 
         <div class="form-group">
             {{ form.status.label(class="form-label") }}
             {{ form.status() }} Ativo
             {% for error in form.status.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
+                    class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
             {% endfor %}
         </div>
         
@@ -76,4 +88,10 @@
         </div>
     </form>
 </div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Inclusão do arquivo JavaScript -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/cadastro_colaborador.js') }}"></script>
+
 {% endblock %}

@@ -55,23 +55,46 @@ button[type=submit]:hover {
     font-size: 1.1rem;
 }
 
+.form-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 80%;
+    flex-direction: row;
+    padding: 1rem;
+}
+
 .form-group {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     width: 50%;
     flex-direction: column;
+    margin: 0 auto;
+}
+
+.form-line .form-group a, button {
+    width: 80%;
+    height: 3.5rem;
+    transition: transform .3s ease;
+}
+
+.form-line .form-group a, button:hover {
+    transform: scale(1.1rem);
 }
 
 .form-group label {
-    display: flex;
-    align-items: left;
     font-size: 1.2rem;
+    align-self: flex-start;
 }
 
 .form-group input[type='text'], input[type='number'], input[type='password'] {
-    display: flex;
-    text-align: left;
     height: 3rem;
     font-size: 1.3rem;
+    width: 100%;
+    text-align: left;
 }
 
 .container-home {

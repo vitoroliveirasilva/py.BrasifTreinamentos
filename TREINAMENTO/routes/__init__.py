@@ -8,6 +8,7 @@ from .responsavel import responsavel_bp
 from .tipo import tipo_bp
 from .treinamento import treinamento_bp
 from .tabelas import tabela_bp
+from .inscricao import inscricao_bp
 
 def register_blueprint(app):
     app.register_blueprint(menu_bp)
@@ -20,3 +21,4 @@ def register_blueprint(app):
     app.register_blueprint(tipo_bp)
     app.register_blueprint(treinamento_bp)
     app.register_blueprint(tabela_bp)
+    app.register_blueprint(inscricao_bp)

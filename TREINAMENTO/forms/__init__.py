@@ -20,3 +20,4 @@ from .treinamento_forms import TreinamentoForm
 from .responsavel_forms import ResponsavelForm
 
 # Inscrição
+from .inscricao import InscricaoTreinamentoForm

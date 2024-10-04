@@ -33,16 +33,15 @@
             </tbody>
         </table>
     </div>
-
+    
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             {% if inscricoes.has_prev %}
-            <a href="{{ url_for('tabela_bp.inscricoes_por_empresa', page=inscricoes.prev_num) }}">Anterior</a>
+            <li class="page-item"><a class="page-link" href="{{ url_for('tabela.inscricoes_por_empresa', page=inscricoes.prev_num) }}">Anterior</a></li>
             {% endif %}
-            <li class="page-item disabled"><a class="page-link" href="">Página {{ inscricoes.page }} de
-                    {{ inscricoes.pages }}</a></li>
+            <li class="page-item disabled"><a class="page-link" href="">Página {{ inscricoes.page }} de {{ inscricoes.pages }}</a></li>
             {% if inscricoes.has_next %}
-            <a href="{{ url_for('tabela_bp.inscricoes_por_empresa', page=inscricoes.next_num) }}">Próximo</a>
+            <li class="page-item"><a class="page-link" href="{{ url_for('tabela.inscricoes_por_empresa', page=inscricoes.next_num) }}">Próxima</a></li>
             {% endif %}
         </ul>
     </nav>

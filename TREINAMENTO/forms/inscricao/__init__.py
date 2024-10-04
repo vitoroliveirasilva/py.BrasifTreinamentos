@@ -1,1 +1,2 @@
 from .inscricao_treinamento_forms import InscricaoTreinamentoForm
+from .inscricao_colaborador_forms import InscricaoColaboradorForm

@@ -4,8 +4,8 @@
 
 {% block content %}
 <div class="container-home">
-    <h1 class="text-center">Inscrições</h1>
-    <h2>Selecione o treinamento para a inscrição</h2>
+    <h1 class="text-center">Inscrever colaboradores</h1>
+    <h2>Treinamento: {{ treinamento.treinamento }}</h2>
 
     <!-- Flash messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -24,33 +24,20 @@
     <form method="POST">
         {{ form.hidden_tag() }}
 
-        <!-- Dropdown para escolher o tipo -->
         <div class="form-group">
-            {{ form.id_tipo.label(class="form-label") }}
-            {{ form.id_tipo(class="form-control", id="tipo-select") }}
-            {% for error in form.id_tipo.errors %}
+            {{ form.filial.label(class="form-label") }}
+            {{ form.filial(class="form-control", id="filial-select") }}
+            {% for error in form.filial.errors %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
                     class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             {% endfor %}
         </div>
 
-        <!-- Dropdown para escolher a marca (inicialmente desabilitado) -->
         <div class="form-group">
-            {{ form.id_marca.label(class="form-label") }}
-            {{ form.id_marca(class="form-control", id="marca-select", disabled=True) }}
-            {% for error in form.id_marca.errors %}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
-                    class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-            </div>
-            {% endfor %}
-        </div>
-
-        <!-- Dropdown para escolher o treinamento (inicialmente desabilitado) -->
-        <div class="form-group">
-            {{ form.id_treinamento.label(class="form-label") }}
-            {{ form.id_treinamento(class="form-control", id="treinamento-select", disabled=True) }}
-            {% for error in form.id_treinamento.errors %}
+            {{ form.id_colaborador.label(class="form-label") }}
+            {{ form.id_colaborador(class="form-control", id="colaborador-select", disabled=True) }}
+            {% for error in form.id_colaborador.errors %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
                     class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
@@ -66,6 +53,6 @@
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Inclusão do arquivo JavaScript -->
-<script type="text/javascript" src="{{ url_for('static', filename='js/inscricao_treinamento.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/inscricao_colaborador.js') }}"></script>
 
 {% endblock %}

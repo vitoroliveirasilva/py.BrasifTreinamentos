@@ -40,7 +40,7 @@
         <ul class="pagination justify-content-center">
             {% if inscricoes.has_prev %}
             <li class="page-item">
-                <a class="page-link" href="{{ url_for('tabela_bp.inscricoes_por_marca', page=inscricoes.prev_num) }}">Anterior</a>
+                <a class="page-link" href="{{ url_for('tabela.inscricoes_por_marca', page=inscricoes.prev_num) }}">Anterior</a>
             </li>
             {% endif %}
             <li class="page-item disabled">
@@ -48,7 +48,7 @@
             </li>
             {% if inscricoes.has_next %}
             <li class="page-item">
-                <a class="page-link" href="{{ url_for('tabela_bp.inscricoes_por_marca', page=inscricoes.next_num) }}">Próxima</a>
+                <a class="page-link" href="{{ url_for('tabela.inscricoes_por_marca', page=inscricoes.next_num) }}">Próxima</a>
             </li>
             {% endif %}
         </ul>

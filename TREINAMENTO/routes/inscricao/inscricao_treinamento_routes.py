@@ -1,27 +1,27 @@
-from flask import render_template, redirect, url_for, flash, request
-from flask_login import login_required, current_user
-from TREINAMENTO import db
+from flask import render_template, redirect, url_for, request, flash
+from flask_login import login_required
 from TREINAMENTO.forms.inscricao import InscricaoTreinamentoForm
-from TREINAMENTO.models import Inscricao, Tipo, Treinamento, Marca
+from TREINAMENTO.models import Tipo, Treinamento, Marca
 from . import inscricao_bp
 
 
 @inscricao_bp.route("/", methods=["GET", "POST"])
 @login_required
-def cadastro_inscricao():
+def inscricao():
     form = InscricaoTreinamentoForm()
 
-    # Preencher o dropdown de tipos
-    tipos = Tipo.query.all()
+    tipos = Tipo.query.filter(Tipo.status == True).all()
     form.id_tipo.choices += [(tipo.id_tipo, tipo.nome) for tipo in tipos]
 
-    if form.validate_on_submit():
-        nova_inscricao = Inscricao.cadastro_inscricao(form, current_user.id)
-        db.session.add(nova_inscricao)
-        db.session.commit()
-        flash("Inscrição cadastrada com sucesso!", "success")
-        return redirect(url_for("inscricao.cadastro_inscricao"))
+    marcas = Marca.query.filter(Marca.status == True).all()
+    form.id_marca.choices += [(marca.id_marca, marca.nome) for marca in marcas]
+    
+    treinamentos = Treinamento.query.filter(Treinamento.status == True).all()
+    form.id_treinamento.choices += [(treinamento.id_treinamento, treinamento.treinamento) for treinamento in treinamentos]
 
+    if form.validate_on_submit():
+        return redirect(url_for("inscricao.inscricao_colaborador", id=form.id_treinamento.data))
+    
     return render_template("/inscricao/inscricao_treinamento.html", form=form)
 
 @inscricao_bp.route("/get_marcas", methods=["GET"])

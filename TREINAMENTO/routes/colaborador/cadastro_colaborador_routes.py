@@ -15,6 +15,9 @@ def cadastro_colaborador():
 
     form.filial.choices += [(filial.name, filial.value) for filial in Filiais]
 
+    empresas = Empresa.query.all()
+    form.id_empresa.choices = [(empresa.id_empresa, empresa.nome_empresa) for empresa in empresas]
+
     if form.validate_on_submit():
         colaborador = Colaborador.cadastro_colaborador(form)
         colaborador.id_responsavel = id_responsavel
@@ -22,6 +25,11 @@ def cadastro_colaborador():
         db.session.commit()
         flash("Colaborador cadastrado com sucesso!", "success")
         return redirect(url_for("colaborador.cadastro_colaborador"))
+    # Se houver erros de validação no formulário
+    elif form.errors:
+        for campo, erros in form.errors.items():
+            for erro in erros:
+                flash(f'{campo.upper()} ERRO: {erro}', 'warning')
 
     return render_template("/cadastro/cadastro_colaborador.html", form=form)
 

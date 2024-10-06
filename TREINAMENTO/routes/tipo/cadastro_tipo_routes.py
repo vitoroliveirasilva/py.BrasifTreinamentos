@@ -4,7 +4,6 @@ from TREINAMENTO import db
 from sqlalchemy.exc import SQLAlchemyError
 from TREINAMENTO.forms.tipo_forms import TipoForm
 from TREINAMENTO.models import Tipo
-from TREINAMENTO.utils import registro_existe
 from . import tipo_bp
 
 
@@ -15,24 +14,30 @@ def cadastro_tipo():
 
     if form.validate_on_submit():
         try:
-            if not registro_existe(Tipo, nome=form.nome.data):
-                tipo = Tipo.cadastro_tipo(form)
-                db.session.add(tipo)
-                db.session.commit()
-                flash("Tipo cadastrado com sucesso!", "success")
-                return redirect(url_for("tabela.tabela_tipos"))
-            else:
-                flash(f"O tipo '{form.nome.data}' já existe. Por favor, escolha outro nome.", "warning")
-        except SQLAlchemyError:
+            # Usa o método cadastro_tipo que já faz a validação do nome existente
+            tipo = Tipo.cadastro_tipo(form)
+            db.session.add(tipo)
+            db.session.commit()
+            flash("Tipo cadastrado com sucesso!", "success")
+            return redirect(url_for("tabela.tabela_tipos"))
+
+        except ValueError as ve:
             db.session.rollback()
-            flash("Erro ao acessar o banco de dados. Tente novamente.", "danger")
-        except ValueError as value_erro:
-            flash(str(value_erro), "danger")
+            flash(str(ve), "warning")
+
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            flash(f"Erro ao acessar o banco de dados: {str(e)}", "danger")
+
         except Exception as e:
-            flash(f"Erro inesperado ao registrar o centro: {str(e)}", "danger")
+            db.session.rollback()
+            flash(f"Erro inesperado ao registrar o tipo: {str(e)}", "danger")
+        
+    # Exibe os erros de validação do formulário
     elif form.errors:
         for campo, erros in form.errors.items():
             for erro in erros:
                 flash(f"ERRO - {campo.upper()}: {erro}", "warning")
+
 
     return render_template("/cadastro/cadastro_tipo.html", form=form)

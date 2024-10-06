@@ -75,14 +75,10 @@ button[type=submit]:hover {
     margin: 0 auto;
 }
 
-.form-line .form-group a, button {
+.form-line .form-group .a_menu, .button_menu {
     width: 80%;
     height: 3.5rem;
-    transition: transform .3s ease;
-}
-
-.form-line .form-group a, button:hover {
-    transform: scale(1.1rem);
+    text-transform: uppercase;
 }
 
 .form-group label {

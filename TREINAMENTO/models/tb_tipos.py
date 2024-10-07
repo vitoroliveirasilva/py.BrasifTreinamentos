@@ -14,16 +14,23 @@ class Tipo(db.Model):
     def __repr__(self):
         return f"<Tipo(id_tipo={self.id_tipo}, nome='{self.nome}', status={self.status})>"
     
-    # Método para criar um tipo a partir do formulário
     @classmethod
     def cadastro_tipo(cls, form):
+        # Verifica se o nome já existe antes de criar o registro
+        if cls.query.filter_by(nome=form.nome.data).first():
+            raise ValueError(f"O tipo '{form.nome.data}' já existe. Por favor, escolha outro nome.")
+        
         return cls(
             nome=form.nome.data,
             status=form.status.data
         )
-    
-    # Método para atualizar o tipo existente a partir do formulário
+
     def atualizar_tipo(self, form):
+        # Verifica se o nome já existe e é diferente do atual
+        tipo_existente = Tipo.query.filter_by(nome=form.nome.data).first()
+        if tipo_existente and tipo_existente.id_tipo != self.id_tipo:
+            raise ValueError(f"O nome '{form.nome.data}' já está em uso por outro registro.")
+
         self.nome = form.nome.data
         self.status = form.status.data
         return self

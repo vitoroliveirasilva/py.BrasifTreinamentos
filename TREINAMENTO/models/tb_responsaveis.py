@@ -12,7 +12,7 @@ class Responsavel(db.Model):
     data_alteracao = db.Column(db.TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
     status = db.Column(db.Boolean, default=True)
 
-    colaboradores = db.relationship('Colaborador', backref='responsavel', lazy=True)
+    colaboradores = db.relationship('Colaborador', backref='responsavel_colaborador', lazy=True)
 
     def __repr__(self):
         return f"<Responsavel(id={self.id}, nome='{self.nome}', email='{self.email}')>"

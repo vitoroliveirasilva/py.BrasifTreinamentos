@@ -24,7 +24,11 @@ class Colaborador(db.Model):
     
     @classmethod
     # Método para criar um colaborador a partir do formulário
-    def cadastro_colaborador(cls, form):
+    def cadastro_colaborador(cls, form, id_responsavel):
+        
+        if not id_responsavel:
+            raise ValueError(f"Não foi possível obter o ID do usuário logado no sistema.")
+        
         # Verifica se o email do colaborador já existe
         colaborador_existente = cls.query.filter_by(email=form.email.data).first()
 
@@ -36,7 +40,7 @@ class Colaborador(db.Model):
             email=form.email.data,
             cargo=form.cargo.data,
             id_empresa=form.id_empresa.data,
-            id_responsavel=form.id_responsavel.data,
+            id_responsavel=id_responsavel,
             filial=form.filial.data,
             status=form.status.data
         )

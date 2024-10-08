@@ -3,6 +3,7 @@ from wtforms import StringField, TextAreaField, SelectField, SubmitField, Boolea
 from wtforms.validators import DataRequired
 
 class TreinamentoForm(FlaskForm):
+    id_tipo = SelectField('Tipo', coerce=int, validators=[DataRequired()])
     id_marca = SelectField('Marca', coerce=int, validators=[DataRequired()])
     treinamento = StringField('Treinamento', validators=[DataRequired()])
     descricao = TextAreaField('Descrição')

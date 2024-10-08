@@ -48,8 +48,7 @@ def cadastro_colaborador():
     
     if form.validate_on_submit():
         try:
-            colaborador = Colaborador.cadastro_colaborador(form)
-            colaborador.id_responsavel = id_responsavel  # Associa o responsável ao colaborador
+            colaborador = Colaborador.cadastro_colaborador(form, id_responsavel)
             db.session.add(colaborador)
             db.session.commit()
             flash("Colaborador cadastrado com sucesso!", "success")

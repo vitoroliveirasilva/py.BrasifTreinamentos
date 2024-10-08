@@ -3,7 +3,7 @@ from flask_login import login_required
 from TREINAMENTO import db
 from sqlalchemy.exc import SQLAlchemyError
 from TREINAMENTO.forms.treinamento_forms import TreinamentoForm
-from TREINAMENTO.models import Treinamento, Marca
+from TREINAMENTO.models import Treinamento, Marca, Tipo
 from . import treinamento_bp
 
 
@@ -15,7 +15,14 @@ def editar_treinamento(id):
 
 
     try:
+        tipos = Tipo.query.filter_by(status=True).all()
         marcas = Marca.query.filter_by(status=True).all()
+        
+        if not tipos:
+            flash("Nenhum tipo encontrado. Por favor, cadastre um tipo antes de cadastrar um treinamento.", "warning")
+            form.id_tipo.choices = []
+        else:
+            form.id_tipo.choices = [(tipo.id_tipo, tipo.nome) for tipo in tipos]
 
         if not marcas:
             flash("Nenhuma marca encontrado. Por favor, cadastre uma marca antes de cadastrar um treinamento.", "warning")
@@ -25,10 +32,12 @@ def editar_treinamento(id):
 
     except SQLAlchemyError as e:
         flash(f"Erro ao acessar o banco de dados ao carregar os marcas: {str(e)}", "danger")
+        form.id_tipo.choices = []
         form.id_marca.choices = []
 
     except Exception as e:
         flash(f"Erro inesperado: {str(e)}", "danger")
+        form.id_tipo.choices = []
         form.id_marca.choices = []
 
     

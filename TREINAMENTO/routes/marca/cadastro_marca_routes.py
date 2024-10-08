@@ -14,11 +14,13 @@ def cadastro_marca():
 
     try:
         tipos = Tipo.query.filter_by(status=True).all()
-        form.id_tipo.choices = [(tipo.id_tipo, tipo.nome) for tipo in tipos]
 
         if not tipos:
             flash("Nenhum tipo encontrado. Por favor, cadastre um tipo antes de cadastrar uma marca.", "warning")
-
+            form.id_tipo.choices = []
+        else:
+            form.id_tipo.choices = [(tipo.id_tipo, tipo.nome) for tipo in tipos]
+            
     except SQLAlchemyError as e:
         flash(f"Erro ao acessar o banco de dados ao carregar os tipos: {str(e)}", "danger")
         form.id_tipo.choices = []

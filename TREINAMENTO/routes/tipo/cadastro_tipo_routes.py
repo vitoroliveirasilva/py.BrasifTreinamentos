@@ -14,7 +14,6 @@ def cadastro_tipo():
 
     if form.validate_on_submit():
         try:
-            # Usa o método cadastro_tipo que já faz a validação do nome existente
             tipo = Tipo.cadastro_tipo(form)
             db.session.add(tipo)
             db.session.commit()
@@ -33,11 +32,4 @@ def cadastro_tipo():
             db.session.rollback()
             flash(f"Erro inesperado ao registrar o tipo: {str(e)}", "danger")
         
-    # Exibe os erros de validação do formulário
-    elif form.errors:
-        for campo, erros in form.errors.items():
-            for erro in erros:
-                flash(f"ERRO - {campo.upper()}: {erro}", "warning")
-
-
     return render_template("/cadastro/cadastro_tipo.html", form=form)

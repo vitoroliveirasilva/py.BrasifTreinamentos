@@ -15,7 +15,6 @@ def editar_tipo(id):
 
     if form.validate_on_submit():
         try:
-            # Usa o método atualizar_tipo que já faz a validação do nome existente
             tipo.atualizar_tipo(form)
             db.session.commit()
             flash("Tipo atualizado com sucesso!", "success")
@@ -32,12 +31,5 @@ def editar_tipo(id):
         except Exception as e:
             db.session.rollback()
             flash(f"Erro inesperado ao atualizar o tipo: {str(e)}", "danger")
-
-    # Exibe os erros de validação do formulário
-    elif form.errors:
-        for campo, erros in form.errors.items():
-            for erro in erros:
-                flash(f"ERRO - {campo.upper()}: {erro}", "warning")
-
 
     return render_template("/edicao/edicao_tipo.html", form=form, tipo=tipo)

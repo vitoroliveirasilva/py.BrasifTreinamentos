@@ -15,11 +15,13 @@ def cadastro_treinamento():
 
     try:
         marcas = Marca.query.filter_by(status=True).all()
-        form.id_marca.choices = [(marca.id_marca, marca.nome) for marca in marcas]
 
         if not marcas:
             flash("Nenhuma marca encontrado. Por favor, cadastre uma marca antes de cadastrar um treinamento.", "warning")
-
+            form.id_marca.choices = []
+        else:
+            form.id_marca.choices = [(marca.id_marca, marca.nome) for marca in marcas]
+            
     except SQLAlchemyError as e:
         flash(f"Erro ao acessar o banco de dados ao carregar os marcas: {str(e)}", "danger")
         form.id_marca.choices = []

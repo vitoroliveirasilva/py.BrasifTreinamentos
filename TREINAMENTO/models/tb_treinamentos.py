@@ -15,10 +15,20 @@ class Treinamento(db.Model):
 
     def __repr__(self):
         return f"<Treinamento(id_treinamento={self.id_treinamento}, treinamento='{self.treinamento}', id_marca={self.id_marca})>"
-    
-    # Método para cadastrar um treinamento a partir do formulário
+
+
     @classmethod
+    # Método para cadastrar um treinamento a partir do formulário
     def cadastro_treinamento(cls, form):
+        # Verifica se o nome do treinamento já existe para a mesma marca
+        treinamento_existente = cls.query.filter_by(
+            treinamento=form.treinamento.data,
+            id_marca=form.id_marca.data
+        ).first()
+
+        if treinamento_existente:
+            raise ValueError(f"O treinamento '{form.treinamento.data}' já existe para essa marca.")
+        
         return cls(
             id_marca=form.id_marca.data,
             treinamento=form.treinamento.data,
@@ -26,8 +36,18 @@ class Treinamento(db.Model):
             status=form.status.data
         )
 
+
     # Método para atualizar o treinamento existente a partir do formulário
     def atualizar_treinamento(self, form):
+        # Verifica se o nome do treinamento já existe e se pertence a outro registro
+        treinamento_existente = Treinamento.query.filter_by(
+            treinamento=form.treinamento.data,
+            id_marca=form.id_marca.data
+        ).first()
+
+        if treinamento_existente and treinamento_existente.id_treinamento != self.id_treinamento:
+            raise ValueError(f"O treinamento '{form.treinamento.data}' já existe para essa marca.")
+
         self.id_marca = form.id_marca.data
         self.treinamento = form.treinamento.data
         self.descricao = form.descricao.data

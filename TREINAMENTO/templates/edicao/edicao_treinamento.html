@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container-home">
     <h1 class="text-center">Editar Treinamento</h1>
-    
+
     <!-- Seção para exibir mensagens flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -19,15 +19,17 @@
     {% endfor %}
     {% endif %}
     {% endwith %}
-    
+
     <form method="POST">
         {{ form.hidden_tag() }}
-        
+
         <div class="form-group">
             {{ form.id_marca.label(class="form-label") }}
             {{ form.id_marca(class="form-control") }}
             {% for error in form.id_marca.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
+                    class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
             {% endfor %}
         </div>
 
@@ -35,7 +37,9 @@
             {{ form.treinamento.label(class="form-label") }}
             {{ form.treinamento(class="form-control", placeholder="Insira o nome do treinamento") }}
             {% for error in form.treinamento.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
+                    class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
             {% endfor %}
         </div>
 
@@ -43,15 +47,19 @@
             {{ form.descricao.label(class="form-label") }}
             {{ form.descricao(class="form-control", placeholder="Descrição do treinamento") }}
             {% for error in form.descricao.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
+                    class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
             {% endfor %}
         </div>
-        
+
         <div class="form-group">
             {{ form.status.label(class="form-label") }}
             {{ form.status() }} Ativo
             {% for error in form.status.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
+                    class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
             {% endfor %}
         </div>
 

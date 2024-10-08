@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container-home">
     <h1 class="text-center">Cadastrar Colaborador</h1>
-    
+
     <!-- Seção para exibir mensagens flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -19,10 +19,10 @@
     {% endfor %}
     {% endif %}
     {% endwith %}
-    
+
     <form method="POST">
         {{ form.hidden_tag() }}
-        
+
         <div class="form-group">
             {{ form.nome.label(class="form-label") }}
             {{ form.nome(class="form-control", placeholder="Insira o nome") }}
@@ -32,7 +32,7 @@
             </div>
             {% endfor %}
         </div>
-        
+
         <div class="form-group">
             {{ form.email.label(class="form-label") }}
             {{ form.email(class="form-control", placeholder="Insira o e-mail") }}
@@ -71,7 +71,7 @@
                     class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             {% endfor %}
-        </div>        
+        </div>
 
         <div class="form-group">
             {{ form.status.label(class="form-label") }}
@@ -82,7 +82,7 @@
             </div>
             {% endfor %}
         </div>
-        
+
         <div class="form-group">
             {{ form.submit(class="btn btn-primary") }}
         </div>

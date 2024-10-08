@@ -5,7 +5,7 @@ from .enum_filiais import Filiais
 class Empresa(db.Model):
     __tablename__ = 'tb_empresas'
     id_empresa = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    nome_empresa = db.Column(db.String(100), nullable=False, unique=True)
+    nome_empresa = db.Column(db.String(50), nullable=False, unique=True)
     filial = db.Column(db.Enum(Filiais), nullable=False)
     data_criacao = db.Column(db.TIMESTAMP, default=datetime.utcnow)
     data_alteracao = db.Column(db.TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)

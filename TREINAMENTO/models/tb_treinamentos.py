@@ -29,17 +29,16 @@ class Treinamento(db.Model):
     def cadastro_treinamento(cls, form):
         # Verifica se o nome do treinamento já existe para a mesma marca e tipo
         treinamento_existente = cls.query.filter_by(
-            treinamento=form.treinamento.data,
-            id_marca=form.id_marca.data,
-            id_tipo=form.id_tipo.data
+            id_marca_tipo=form.id_marca_tipo.data,
+            treinamento=form.treinamento.data
         ).first()
 
         if treinamento_existente:
             raise ValueError(f"O treinamento '{form.treinamento.data}' já existe para essa marca e tipo.")
         
+        # Cria e retorna uma nova instância de Treinamento
         return cls(
-            id_marca=form.id_marca.data,
-            id_tipo=form.id_tipo.data,
+            id_marca_tipo=form.id_marca_tipo.data,
             treinamento=form.treinamento.data,
             descricao=form.descricao.data,
             status=form.status.data
@@ -48,17 +47,17 @@ class Treinamento(db.Model):
     def atualizar_treinamento(self, form):
         # Verifica se o nome do treinamento já existe e se pertence a outro registro
         treinamento_existente = Treinamento.query.filter_by(
-            treinamento=form.treinamento.data,
-            id_marca=form.id_marca.data,
-            id_tipo=form.id_tipo.data
+            id_marca_tipo=form.id_marca_tipo.data,
+            treinamento=form.treinamento.data
         ).first()
 
         if treinamento_existente and treinamento_existente.id_treinamento != self.id_treinamento:
             raise ValueError(f"O treinamento '{form.treinamento.data}' já existe para essa marca e tipo.")
 
-        self.id_marca = form.id_marca.data
-        self.id_tipo = form.id_tipo.data
+        # Atualiza os atributos da instância com os dados do formulário
+        self.id_marca_tipo = form.id_marca_tipo.data
         self.treinamento = form.treinamento.data
         self.descricao = form.descricao.data
         self.status = form.status.data
+
         return self

@@ -18,3 +18,28 @@ class MarcaTipo(db.Model):
         return f"<MarcaTipo(id_marca_tipo={self.id_marca_tipo}, id_marca={self.id_marca}, " \
                f"id_tipo={self.id_tipo})>"
 
+
+    @classmethod
+    def cadastro_marca_tipo(cls, form):
+        # Verifica se a combinação de id_marca e id_tipo já existe
+        if cls.query.filter_by(id_marca=form.id_marca.data, id_tipo=form.id_tipo.data).first():
+            raise ValueError(f"A combinação de marca e tipo já existe. Por favor, escolha outra.")
+
+        # Cria e retorna uma nova instância de MarcaTipo
+        return cls(
+            id_marca=form.id_marca.data,
+            id_tipo=form.id_tipo.data
+        )
+
+    def atualizar_marca_tipo(self, form):
+        # Verifica se a nova combinação de id_marca e id_tipo já existe e é diferente da atual
+        marca_tipo_existente = MarcaTipo.query.filter_by(id_marca=form.id_marca.data, id_tipo=form.id_tipo.data).first()
+
+        if marca_tipo_existente and marca_tipo_existente.id_marca_tipo != self.id_marca_tipo:
+            raise ValueError(f"A combinação de marca e tipo já está em uso por outro registro.")
+
+        # Atualiza os atributos da instância com os dados do formulário
+        self.id_marca = form.id_marca.data
+        self.id_tipo = form.id_tipo.data
+
+        return self

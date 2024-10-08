@@ -25,28 +25,30 @@ class Empresa(db.Model):
 
 
     @classmethod
-    # Método para criar uma empresa a partir do formulário
     def cadastro_empresa(cls, form):
+        
         # Verifica se o nome da empresa já existe
-        empresa_existente = cls.query.filter_by(nome_empresa=form.nome_empresa.data).first()
+        empresa_existente = cls.query.filter_by(nome_empresa=form.nome_empresa.data, filial=form.filial.data).first()
 
         if empresa_existente:
-            raise ValueError(f"A empresa '{form.nome_empresa.data}' já existe. Por favor, escolha outro nome.")
+            raise ValueError(f"A empresa '{form.nome_empresa.data}' já existe para a filial '{form.filial.data}'. Por favor, escolha outro nome.")
         
+        # Cria e retorna uma nova instância de Empresa
         return cls(
             nome_empresa=form.nome_empresa.data,
             filial=form.filial.data,
             status=form.status.data
         )
     
-    # Método para atualizar a empresa existente a partir do formulário
     def atualizar_empresa(self, form):
+        
         # Verifica se o nome da empresa já existe e se pertence a outro registro
-        empresa_existente = Empresa.query.filter_by(nome_empresa=form.nome_empresa.data).first()
+        empresa_existente = Empresa.query.filter_by(nome_empresa=form.nome_empresa.data, filial=form.filial.data).first()
 
         if empresa_existente and empresa_existente.id_empresa != self.id_empresa:
-            raise ValueError(f"O nome da empresa '{form.nome_empresa.data}' já está em uso por outro registro.")
+            raise ValueError(f"O nome da empresa '{form.nome_empresa.data}' já está em uso por outro registro na filial '{form.filial.data}'.")
 
+        # Atualiza os atributos da instância com os dados do formulário
         self.nome_empresa = form.nome_empresa.data
         self.filial = form.filial.data
         self.status = form.status.data

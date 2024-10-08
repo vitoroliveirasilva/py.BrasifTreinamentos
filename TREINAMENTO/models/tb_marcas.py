@@ -24,8 +24,9 @@ class Marca(db.Model):
     def cadastro_marca(cls, form):
         # Verifica se o nome da marca já existe
         if cls.query.filter_by(nome=form.nome.data).first():
-            raise ValueError(f"A marca já existe. Por favor, escolha outro nome.")
+            raise ValueError(f"A marca '{form.nome.data}' já existe. Por favor, escolha outro nome.")
         
+        # Cria e retorna uma nova instância de Marca
         return cls(
             nome=form.nome.data,
             id_tipo=form.id_tipo.data,
@@ -37,8 +38,9 @@ class Marca(db.Model):
         marca_existente = Marca.query.filter_by(nome=form.nome.data).first()
 
         if marca_existente and marca_existente.id_marca != self.id_marca:
-            raise ValueError(f"O nome da marca já está em uso por outro registro.")
+            raise ValueError(f"O nome da marca '{form.nome.data}' já está em uso por outro registro.")
 
+        # Atualiza os atributos da instância com os dados do formulário
         self.nome = form.nome.data
         self.id_tipo = form.id_tipo.data
         self.status = form.status.data

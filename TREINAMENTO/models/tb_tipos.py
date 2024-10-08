@@ -21,21 +21,23 @@ class Tipo(db.Model):
 
     @classmethod
     def cadastro_tipo(cls, form):
-        # Verifica se o nome já existe antes de criar o registro
+        # Verifica se o nome existe
         if cls.query.filter_by(nome=form.nome.data).first():
             raise ValueError(f"O tipo '{form.nome.data}' já existe. Por favor, escolha outro nome.")
-        
+
+        # Cria e retorna uma nova instância de Tipo
         return cls(
             nome=form.nome.data,
             status=form.status.data
         )
 
     def atualizar_tipo(self, form):
-        # Verifica se o nome já existe e é diferente do atual
+        # Verifica se o nome existe e é diferente do atual
         tipo_existente = Tipo.query.filter_by(nome=form.nome.data).first()
         if tipo_existente and tipo_existente.id_tipo != self.id_tipo:
             raise ValueError(f"O nome '{form.nome.data}' já está em uso por outro registro.")
 
+        # Atualiza os atributos da instância com os dados do formulário
         self.nome = form.nome.data
         self.status = form.status.data
         return self

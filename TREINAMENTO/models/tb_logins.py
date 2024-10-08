@@ -27,21 +27,32 @@ class Login(db.Model):
 
 
     @classmethod
-    # Método para criar um login a partir do formulário
     def cadastro_login(cls, form):
+        
+        # Verifica se o login já existe para a combinação de usuário e marca_tipo
+        login_existente = cls.query.filter_by(usuario=form.usuario.data, id_marca_tipo=form.id_marca_tipo.data).first()
+
+        if login_existente:
+            raise ValueError(f"O usuário '{form.usuario.data}' já está cadastrado para a marca/tipo correspondente.")
+        
         return cls(
             usuario=form.usuario.data,
             id_colaborador=form.id_colaborador.data,
-            id_marca=form.id_marca.data,
-            id_tipo=form.id_tipo.data,
+            id_marca_tipo=form.id_marca_tipo.data,
             status=form.status.data
         )
 
-    # Método para atualizar o login existente a partir do formulário
     def atualizar_login(self, form):
+        
+        # Verifica se o login já existe para a combinação de usuário e marca_tipo, exceto para o login atual
+        login_existente = Login.query.filter_by(usuario=form.usuario.data, id_marca_tipo=form.id_marca_tipo.data).first()
+
+        if login_existente and login_existente.id_login != self.id_login:
+            raise ValueError(f"O usuário '{form.usuario.data}' já está em uso por outro login na mesma marca/tipo.")
+
+        # Atualiza os atributos da instância com os dados do formulário
         self.usuario = form.usuario.data
         self.id_colaborador = form.id_colaborador.data
-        self.id_marca = form.id_marca.data
-        self.id_tipo = form.id_tipo.data
+        self.id_marca_tipo = form.id_marca_tipo.data
         self.status = form.status.data
         return self

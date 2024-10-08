@@ -28,21 +28,21 @@ class Colaborador(db.Model):
                f"id_empresa={self.id_empresa}, id_responsavel={self.id_responsavel}, " \
                f"filial='{self.filial}', status={self.status}, " \
                f"data_criacao='{self.data_criacao}', data_alteracao='{self.data_alteracao}')>"
-    
-    
+
+
     @classmethod
-    # Método para criar um colaborador a partir do formulário
     def cadastro_colaborador(cls, form, id_responsavel):
-        
+                
         if not id_responsavel:
-            raise ValueError(f"Não foi possível obter o ID do usuário logado no sistema.")
+            raise ValueError("Não foi possível obter o ID do responsável logado no sistema.")
         
-        # Verifica se o email do colaborador já existe
+        # Verifica se o email do colaborador já está cadastrado
         colaborador_existente = cls.query.filter_by(email=form.email.data).first()
 
         if colaborador_existente:
             raise ValueError(f"O email '{form.email.data}' já está cadastrado para outro colaborador.")
 
+        # Cria e retorna uma nova instância de Colaborador
         return cls(
             nome=form.nome.data,
             email=form.email.data,
@@ -53,14 +53,15 @@ class Colaborador(db.Model):
             status=form.status.data
         )
 
-    # Método para atualizar o colaborador existente a partir do formulário
     def atualizar_colaborador(self, form):
+        
         # Verifica se o email já está sendo utilizado por outro colaborador
         colaborador_existente = Colaborador.query.filter_by(email=form.email.data).first()
 
         if colaborador_existente and colaborador_existente.id_colaborador != self.id_colaborador:
             raise ValueError(f"O email '{form.email.data}' já está em uso por outro colaborador.")
 
+        # Atualiza os atributos da instância com os dados do formulário
         self.nome = form.nome.data
         self.email = form.email.data
         self.cargo = form.cargo.data

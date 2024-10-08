@@ -1,8 +1,10 @@
 from TREINAMENTO import db
 from datetime import datetime
 
+
 class Responsavel(db.Model):
     __tablename__ = 'tb_responsaveis'
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False)
@@ -12,10 +14,13 @@ class Responsavel(db.Model):
     data_alteracao = db.Column(db.TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
     status = db.Column(db.Boolean, default=True)
 
-    colaboradores = db.relationship('Colaborador', backref='responsavel_colaborador', lazy=True)
+    colaboradores = db.relationship('Colaborador', back_populates='responsavel', lazy=True)
+    inscricoes = db.relationship('Inscricao', back_populates='responsavel', lazy=True)
 
     def __repr__(self):
-        return f"<Responsavel(id={self.id}, nome='{self.nome}', email='{self.email}')>"
+        return f"<Responsavel(id={self.id}, nome='{self.nome}', email='{self.email}', " \
+               f"permissao={self.permissao}, status={self.status}, " \
+               f"data_criacao='{self.data_criacao}', data_alteracao='{self.data_alteracao}')>"
 
 
     # Métodos exigidos pelo Flask-Login

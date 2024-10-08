@@ -1,20 +1,27 @@
 from TREINAMENTO import db
 from datetime import datetime
 from .enum_filiais import Filiais
+from sqlalchemy import UniqueConstraint
+
 
 class Empresa(db.Model):
     __tablename__ = 'tb_empresas'
+
     id_empresa = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    nome_empresa = db.Column(db.String(50), nullable=False, unique=True)
+    nome_empresa = db.Column(db.String(100), nullable=False)
     filial = db.Column(db.Enum(Filiais), nullable=False)
     data_criacao = db.Column(db.TIMESTAMP, default=datetime.utcnow)
     data_alteracao = db.Column(db.TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
     status = db.Column(db.Boolean, default=True)
 
-    colaboradores = db.relationship('Colaborador', backref='empresa', lazy=True)
+    colaboradores = db.relationship('Colaborador', back_populates='empresa', lazy=True)
+
+    UniqueConstraint('nome_empresa', 'filial', name='unique_empresa_filial')
 
     def __repr__(self):
-        return f"<Empresa(id_empresa={self.id_empresa}, nome_empresa='{self.nome_empresa}', filial='{self.filial}')>"
+        return f"<Empresa(id_empresa={self.id_empresa}, nome_empresa='{self.nome_empresa}', " \
+               f"filial='{self.filial}', status={self.status}, " \
+               f"data_criacao='{self.data_criacao}', data_alteracao='{self.data_alteracao}')>"
 
 
     @classmethod

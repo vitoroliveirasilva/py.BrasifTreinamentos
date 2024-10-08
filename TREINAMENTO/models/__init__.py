@@ -7,3 +7,4 @@ from .tb_empresas import Empresa
 from .tb_colaboradores import Colaborador
 from .tb_logins import Login
 from .tb_inscricoes import Inscricao
+from .tb_marca_tipo import MarcaTipo

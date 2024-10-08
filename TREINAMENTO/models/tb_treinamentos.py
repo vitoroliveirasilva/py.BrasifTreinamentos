@@ -1,23 +1,28 @@
 from TREINAMENTO import db
 from datetime import datetime
+from sqlalchemy import UniqueConstraint
+
 
 class Treinamento(db.Model):
     __tablename__ = 'tb_treinamentos'
+
     id_treinamento = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    id_marca = db.Column(db.Integer, db.ForeignKey('tb_marcas.id_marca'), nullable=False)
-    id_tipo = db.Column(db.Integer, db.ForeignKey('tb_tipos.id_tipo'), nullable=False)
+    id_marca_tipo = db.Column(db.Integer, db.ForeignKey('tb_marca_tipo.id_marca_tipo'), nullable=False)
     treinamento = db.Column(db.String(100), nullable=False)
     descricao = db.Column(db.Text)
     data_criacao = db.Column(db.TIMESTAMP, default=datetime.utcnow)
     data_alteracao = db.Column(db.TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
     status = db.Column(db.Boolean, default=True)
 
-    inscricoes = db.relationship('Inscricao', backref='treinamento_inscricao', lazy=True)
-    tipo = db.relationship('Tipo', back_populates='treinamentos', lazy=True)
-    marca = db.relationship('Marca', back_populates='treinamentos', lazy=True)
+    marca_tipo = db.relationship('MarcaTipo', backref=db.backref('treinamentos', lazy=True))
+
+    UniqueConstraint('id_marca_tipo', 'treinamento', name='unique_treinamento_marca_tipo')
 
     def __repr__(self):
-        return f"<Treinamento(id_treinamento={self.id_treinamento}, treinamento='{self.treinamento}', id_marca={self.id_marca}, id_tipo={self.id_tipo})>"
+        return f"<Treinamento(id_treinamento={self.id_treinamento}, " \
+               f"id_marca_tipo={self.id_marca_tipo}, treinamento='{self.treinamento}', " \
+               f"status={self.status}, data_criacao='{self.data_criacao}', " \
+               f"data_alteracao='{self.data_alteracao}')>"
 
 
     @classmethod

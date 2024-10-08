@@ -2,11 +2,13 @@ from TREINAMENTO import db
 from datetime import datetime
 from .enum_filiais import Filiais
 
+
 class Colaborador(db.Model):
     __tablename__ = 'tb_colaboradores'
+
     id_colaborador = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nome = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False, unique=True)
+    email = db.Column(db.String(100), nullable=False)
     cargo = db.Column(db.String(100))
     id_empresa = db.Column(db.Integer, db.ForeignKey('tb_empresas.id_empresa'), nullable=False)
     id_responsavel = db.Column(db.Integer, db.ForeignKey('tb_responsaveis.id'), nullable=False)
@@ -15,12 +17,18 @@ class Colaborador(db.Model):
     data_alteracao = db.Column(db.TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
     status = db.Column(db.Boolean, default=True)
 
-    logins = db.relationship('Login', backref='colaborador', lazy=True)
-    inscricoes = db.relationship('Inscricao', backref='colaborador', lazy=True)
+    empresa = db.relationship('Empresa', back_populates='colaboradores')
+    responsavel = db.relationship('Responsavel', back_populates='colaboradores')
+    logins = db.relationship('Login', back_populates='colaborador', lazy=True)
+    inscricoes = db.relationship('Inscricao', back_populates='colaborador', lazy=True)
 
     def __repr__(self):
-        return f"<Colaborador(id_colaborador={self.id_colaborador}, nome='{self.nome}', email='{self.email}', filial='{self.filial}')>"
-
+        return f"<Colaborador(id_colaborador={self.id_colaborador}, nome='{self.nome}', " \
+               f"email='{self.email}', cargo='{self.cargo}', " \
+               f"id_empresa={self.id_empresa}, id_responsavel={self.id_responsavel}, " \
+               f"filial='{self.filial}', status={self.status}, " \
+               f"data_criacao='{self.data_criacao}', data_alteracao='{self.data_alteracao}')>"
+    
     
     @classmethod
     # Método para criar um colaborador a partir do formulário

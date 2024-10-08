@@ -6,7 +6,7 @@ $(document).ready(function () {
         if (filial_name && filial_name !== "") {
             // Realiza a chamada AJAX para buscar as empresas associadas
             $.ajax({
-                url: "/colaborador/get_empresa", 
+                url: "/colaborador/get_empresas", 
                 type: 'GET',
                 data: { filial: filial_name }, 
                 success: function (data) {

@@ -6,7 +6,7 @@ class Marca(db.Model):
     __tablename__ = 'tb_marcas'
 
     id_marca = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    nome = db.Column(db.String(100), unique=True, nullable=False)
+    nome = db.Column(db.String(50), unique=True, nullable=False)
     data_criacao = db.Column(db.TIMESTAMP, default=datetime.utcnow)
     data_alteracao = db.Column(db.TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
     status = db.Column(db.Boolean, default=True)
@@ -28,7 +28,6 @@ class Marca(db.Model):
         # Cria e retorna uma nova instância de Marca
         return cls(
             nome=form.nome.data,
-            id_tipo=form.id_tipo.data,
             status=form.status.data
         )
     
@@ -41,7 +40,6 @@ class Marca(db.Model):
 
         # Atualiza os atributos da instância com os dados do formulário
         self.nome = form.nome.data
-        self.id_tipo = form.id_tipo.data
         self.status = form.status.data
 
         return self

@@ -13,30 +13,12 @@ def editar_marca(id):
     marca = Marca.query.get_or_404(id)
     form = MarcaForm(obj=marca)
 
-    try:
-        tipos = Tipo.query.filter_by(status=True).all()
-
-        if not tipos:
-            flash("Nenhum tipo encontrado. Por favor, cadastre um tipo antes de cadastrar uma marca.", "warning")
-            form.id_tipo.choices = []
-        else:
-            form.id_tipo.choices = [(tipo.id_tipo, tipo.nome) for tipo in tipos]
-
-    except SQLAlchemyError as e:
-        flash(f"Erro ao acessar o banco de dados ao carregar os tipos: {str(e)}", "danger")
-        form.id_tipo.choices = []
-
-    except Exception as e:
-        flash(f"Erro inesperado: {str(e)}", "danger")
-        form.id_tipo.choices = []
-
-
     if form.validate_on_submit():
         try:
             Marca.atualizar_marca(marca, form)
             db.session.commit()
             flash("marca atualizado com sucesso!", "success")
-            return redirect(url_for("marca.cadastro_marca"))
+            return redirect(url_for("tabela.tabela_marcas"))
         
         except ValueError as ve:
             db.session.rollback()

@@ -6,7 +6,7 @@ class Tipo(db.Model):
     __tablename__ = 'tb_tipos'
 
     id_tipo = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    nome = db.Column(db.String(100), unique=True, nullable=False)
+    nome = db.Column(db.String(50), unique=True, nullable=False)
     data_criacao = db.Column(db.TIMESTAMP, default=datetime.utcnow)
     data_alteracao = db.Column(db.TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
     status = db.Column(db.Boolean, default=True)

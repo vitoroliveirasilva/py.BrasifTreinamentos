@@ -11,16 +11,14 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Tipo</th>
                     <th>Marca</th>
                     <th>Editar</th>
                     <th>Logins</th>
                 </tr>
             </thead>
             <tbody>
-                {% for tipo, marca in marcas.items %}
+                {% for marca in marcas.items %}
                 <tr>
-                    <td>{{ tipo.nome }}</td>
                     <td>{{ marca.nome }}</td>
                     <td>
                         <a href="{{ url_for('marca.editar_marca', id=marca.id_marca) }}">

@@ -1,5 +1,6 @@
 from TREINAMENTO import db
 from datetime import datetime
+from sqlalchemy import UniqueConstraint
 
 class Login(db.Model):
     __tablename__ = 'tb_logins'
@@ -11,11 +12,14 @@ class Login(db.Model):
     data_alteracao = db.Column(db.TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
     status = db.Column(db.Boolean, default=True)
 
+    __table_args__ = (UniqueConstraint('usuario', 'id_marca', name='uq_usuario_marca'),)
+
     def __repr__(self):
         return f"<Login(id_login={self.id_login}, usuario='{self.usuario}', id_colaborador={self.id_colaborador}, id_marca={self.id_marca})>"
-    
-    # Método para criar um login a partir do formulário
+
+
     @classmethod
+    # Método para criar um login a partir do formulário
     def cadastro_login(cls, form):
         return cls(
             usuario=form.usuario.data,
@@ -23,7 +27,7 @@ class Login(db.Model):
             id_marca=form.id_marca.data,
             status=form.status.data
         )
-    
+
     # Método para atualizar o login existente a partir do formulário
     def atualizar_login(self, form):
         self.usuario = form.usuario.data

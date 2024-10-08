@@ -1,265 +1,148 @@
-## Estrutura de Arquivos
+# Documentação Models
 
-A divisão dos modelos por arquivos visa facilitar a organização do projeto. A estrutura do diretório está da seguinte maneira:
+## 1. Responsavel
+Modelo que representa os responsáveis pelo cadastro de colaboradores e inscrições.
 
-```
-/models
-  ├── enum_filiais.py
-  ├── tb_responsaveis.py
-  ├── tb_tipos.py
-  ├── tb_marcas.py
-  ├── tb_treinamentos.py
-  ├── tb_empresas.py
-  ├── tb_colaboradores.py
-  ├── tb_logins.py
-  ├── tb_inscricoes.py
-  └── __init__.py
-```
+### Campos:
+- **id** (INT, PK): Identificador único do responsável.
+- **nome** (VARCHAR(100), NOT NULL): Nome completo do responsável.
+- **email** (VARCHAR(100), NOT NULL): Endereço de e-mail do responsável.
+- **id_azure_ad** (VARCHAR(100), UNIQUE, NOT NULL): Identificador único do Azure AD.
+- **permissao** (BOOLEAN, NOT NULL, DEFAULT false): Indica se o responsável tem permissão especial.
+- **data_criacao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP)): Data e hora da criação do registro.
+- **data_alteracao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)): Data e hora da última alteração do registro.
+- **status** (BOOLEAN, DEFAULT true): Indica se o responsável está ativo.
 
-Cada arquivo contém a classe que representa uma tabela no banco de dados. O arquivo `__init__.py` serve para inicializar e disponibilizar os modelos para serem utilizados no projeto.
+### Métodos:
+- **__repr__()**: Representa a instância como uma string, mostrando os principais atributos.
 
 ---
 
-### 1. **Responsáveis** (`tb_responsaveis.py`)
+## 2. Tipo
+Modelo que representa os tipos de marcas.
 
-**Tabela: `tb_responsaveis`**
+### Campos:
+- **id_tipo** (INT, PK): Identificador único do tipo.
+- **nome** (VARCHAR(100), UNIQUE, NOT NULL): Nome do tipo.
+- **data_criacao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP)): Data e hora da criação do registro.
+- **data_alteracao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)): Data e hora da última alteração do registro.
+- **status** (BOOLEAN, DEFAULT true): Indica se o tipo está ativo.
 
-Armazena informações sobre os responsáveis pelos colaboradores.
-
-- **Campos:**
-  - `id`: Chave primária.
-  - `nome`: Nome do responsável.
-  - `email`: E-mail do responsável.
-  - `id_azure_ad`: ID único no Azure AD.
-  - `permissao`: Define se o responsável possui permissões administrativas.
-  - `data_criacao`: Data de criação do registro.
-  - `data_alteracao`: Data da última alteração do registro.
-  - `status`: Indica se o registro está ativo.
-
-- **Relacionamento:**
-  - Um responsável pode estar associado a vários colaboradores.
-
-```python
-class Responsavel(db.Model):
-    # Definição dos campos e relacionamentos
-```
+### Métodos:
+- **__repr__()**: Representa a instância como uma string, mostrando os principais atributos.
 
 ---
 
-### 2. **Filiais** (`enum_filiais.py`)
+## 3. Marca
+Modelo que representa as marcas.
 
-**Enumeração: `enum_filiais`**
+### Campos:
+- **id_marca** (INT, PK): Identificador único da marca.
+- **nome** (VARCHAR(100), UNIQUE, NOT NULL): Nome da marca.
+- **data_criacao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP)): Data e hora da criação do registro.
+- **data_alteracao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)): Data e hora da última alteração do registro.
+- **status** (BOOLEAN, DEFAULT true): Indica se a marca está ativa.
 
-Define as filiais disponíveis como valores fixos.
-
-- **Valores possíveis:**
-  - Jundiaí
-  - Belo Horizonte
-  - Ribeirão Preto
-  - Cuiabá
-  - Rio de Janeiro
-  - Tocantins
-  - Brasília
-  - Goiânia
-  - Curitiba
-
-```python
-class Filiais(Enum):
-    # Definição dos valores da enumeração
-```
+### Métodos:
+- **__repr__()**: Representa a instância como uma string, mostrando os principais atributos.
 
 ---
 
-### 3. **Tipos de Treinamento** (`tb_tipos.py`)
+## 4. MarcaTipo
+Modelo que representa a relação entre marcas e tipos.
 
-**Tabela: `tb_tipos`**
+### Campos:
+- **id_marca_tipo** (INT, PK): Identificador único da relação.
+- **id_marca** (INT, FK): Identificador da marca associada.
+- **id_tipo** (INT, FK): Identificador do tipo associado.
 
-Armazena os diferentes tipos de treinamentos.
-
-- **Campos:**
-  - `id_tipo`: Chave primária.
-  - `nome`: Nome único do tipo de treinamento.
-  - `data_criacao`: Data de criação do registro.
-  - `data_alteracao`: Data da última alteração do registro.
-  - `status`: Indica se o tipo de treinamento está ativo.
-
-- **Relacionamento:**
-  - Um tipo pode ter várias marcas associadas.
-
-```python
-class Tipo(db.Model):
-    # Definição dos campos e relacionamentos
-```
+### Métodos:
+- **__repr__()**: Representa a instância como uma string, mostrando os principais atributos.
 
 ---
 
-### 4. **Marcas** (`tb_marcas.py`)
+## 5. Treinamento
+Modelo que representa os treinamentos oferecidos.
 
-**Tabela: `tb_marcas`**
+### Campos:
+- **id_treinamento** (INT, PK): Identificador único do treinamento.
+- **id_marca_tipo** (INT, FK): Identificador da relação entre marca e tipo.
+- **treinamento** (VARCHAR(100), NOT NULL): Nome do treinamento.
+- **descricao** (TEXT): Descrição detalhada do treinamento.
+- **data_criacao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP)): Data e hora da criação do registro.
+- **data_alteracao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)): Data e hora da última alteração do registro.
+- **status** (BOOLEAN, DEFAULT true): Indica se o treinamento está ativo.
 
-Armazena informações sobre as marcas associadas aos treinamentos.
-
-- **Campos:**
-  - `id_marca`: Chave primária.
-  - `nome`: Nome único da marca.
-  - `id_tipo`: Chave estrangeira referenciando `tb_tipos`.
-  - `data_criacao`: Data de criação do registro.
-  - `data_alteracao`: Data da última alteração do registro.
-  - `status`: Indica se a marca está ativa.
-
-- **Relacionamento:**
-  - Uma marca pertence a um tipo de treinamento e pode ter vários treinamentos e logins associados.
-
-```python
-class Marca(db.Model):
-    # Definição dos campos e relacionamentos
-```
+### Métodos:
+- **__repr__()**: Representa a instância como uma string, mostrando os principais atributos.
 
 ---
 
-### 5. **Treinamentos** (`tb_treinamentos.py`)
+## 6. Empresa
+Modelo que representa as empresas cadastradas.
 
-**Tabela: `tb_treinamentos`**
+### Campos:
+- **id_empresa** (INT, PK): Identificador único da empresa.
+- **nome_empresa** (VARCHAR(100), NOT NULL): Nome da empresa.
+- **filial** (ENUM, NOT NULL): Filial da empresa (opções: Jundiaí, Belo Horizonte, etc.).
+- **data_criacao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP)): Data e hora da criação do registro.
+- **data_alteracao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)): Data e hora da última alteração do registro.
+- **status** (BOOLEAN, DEFAULT true): Indica se a empresa está ativa.
 
-Armazena informações sobre os treinamentos disponíveis.
-
-- **Campos:**
-  - `id_treinamento`: Chave primária.
-  - `id_marca`: Chave estrangeira referenciando `tb_marcas`.
-  - `treinamento`: Nome do treinamento.
-  - `descricao`: Descrição do treinamento.
-  - `data_criacao`: Data de criação do registro.
-  - `data_alteracao`: Data da última alteração do registro.
-  - `status`: Indica se o treinamento está ativo.
-
-- **Relacionamento:**
-  - Um treinamento pertence a uma marca e pode ter várias inscrições associadas.
-
-```python
-class Treinamento(db.Model):
-    # Definição dos campos e relacionamentos
-```
+### Métodos:
+- **__repr__()**: Representa a instância como uma string, mostrando os principais atributos.
 
 ---
 
-### 6. **Empresas** (`tb_empresas.py`)
+## 7. Colaborador
+Modelo que representa os colaboradores das empresas.
 
-**Tabela: `tb_empresas`**
+### Campos:
+- **id_colaborador** (INT, PK): Identificador único do colaborador.
+- **nome** (VARCHAR(100), NOT NULL): Nome completo do colaborador.
+- **email** (VARCHAR(100), NOT NULL): Endereço de e-mail do colaborador.
+- **cargo** (VARCHAR(100)): Cargo do colaborador na empresa.
+- **id_empresa** (INT, FK): Identificador da empresa onde o colaborador está vinculado.
+- **id_responsavel** (INT, FK): Identificador do responsável pelo colaborador.
+- **filial** (ENUM, NOT NULL): Filial onde o colaborador está localizado.
+- **data_criacao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP)): Data e hora da criação do registro.
+- **data_alteracao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)): Data e hora da última alteração do registro.
+- **status** (BOOLEAN, DEFAULT true): Indica se o colaborador está ativo.
 
-Armazena informações sobre as empresas às quais os colaboradores estão vinculados.
-
-- **Campos:**
-  - `id_empresa`: Chave primária.
-  - `nome_empresa`: Nome da empresa.
-  - `filial`: Localização da empresa (usando a enumeração `enum_filiais`).
-  - `data_criacao`: Data de criação do registro.
-  - `data_alteracao`: Data da última alteração do registro.
-  - `status`: Indica se a empresa está ativa.
-
-- **Relacionamento:**
-  - Uma empresa pode ter vários colaboradores associados.
-
-```python
-class Empresa(db.Model):
-    # Definição dos campos e relacionamentos
-```
+### Métodos:
+- **__repr__()**: Representa a instância como uma string, mostrando os principais atributos.
 
 ---
 
-### 7. **Colaboradores** (`tb_colaboradores.py`)
+## 8. Login
+Modelo que representa os logins dos colaboradores.
 
-**Tabela: `tb_colaboradores`**
+### Campos:
+- **id_login** (INT, PK): Identificador único do login.
+- **id_colaborador** (INT, FK): Identificador do colaborador associado ao login.
+- **id_marca_tipo** (INT, FK): Identificador da relação entre marca e tipo.
+- **usuario** (VARCHAR(100), NOT NULL): Nome de usuário utilizado para login.
+- **data_criacao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP)): Data e hora da criação do registro.
+- **data_alteracao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)): Data e hora da última alteração do registro.
+- **status** (BOOLEAN, DEFAULT true): Indica se o login está ativo.
 
-Armazena informações sobre os colaboradores.
-
-- **Campos:**
-  - `id_colaborador`: Chave primária.
-  - `nome`: Nome do colaborador.
-  - `email`: E-mail do colaborador.
-  - `cargo`: Cargo do colaborador.
-  - `id_empresa`: Chave estrangeira referenciando `tb_empresas`.
-  - `id_responsavel`: Chave estrangeira referenciando `tb_responsaveis`.
-  - `filial`: Localização do colaborador (usando a enumeração `enum_filiais`).
-  - `data_criacao`: Data de criação do registro.
-  - `data_alteracao`: Data da última alteração do registro.
-  - `status`: Indica se o colaborador está ativo.
-
-- **Relacionamento:**
-  - Um colaborador pertence a uma empresa e é gerenciado por um responsável.
-  - Um colaborador pode ter vários logins e inscrições associadas.
-
-```python
-class Colaborador(db.Model):
-    # Definição dos campos e relacionamentos
-```
+### Métodos:
+- **__repr__()**: Representa a instância como uma string, mostrando os principais atributos.
 
 ---
 
-### 8. **Logins** (`tb_logins.py`)
+## 9. Inscricao
+Modelo que representa as inscrições em treinamentos.
 
-**Tabela: `tb_logins`**
+### Campos:
+- **id_inscricao** (INT, PK): Identificador único da inscrição.
+- **id_colaborador** (INT, FK): Identificador do colaborador inscrito.
+- **id_treinamento** (INT, FK): Identificador do treinamento no qual o colaborador está inscrito.
+- **id_responsavel** (INT, FK): Identificador do responsável pela inscrição.
+- **data_inscricao** (DATE, NOT NULL): Data em que a inscrição foi realizada.
+- **status** (ENUM, NOT NULL): Status da inscrição (opções: Pendente, Concluída, Cancelada).
+- **data_criacao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP)): Data e hora da criação do registro.
+- **data_alteracao** (TIMESTAMP, DEFAULT (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)): Data e hora da última alteração do registro.
 
-Armazena as informações de login dos colaboradores para cada marca.
-
-- **Campos:**
-  - `id_login`: Chave primária.
-  - `id_colaborador`: Chave estrangeira referenciando `tb_colaboradores`.
-  - `id_marca`: Chave estrangeira referenciando `tb_marcas`.
-  - `usuario`: Nome de usuário para login.
-  - `data_criacao`: Data de criação do registro.
-  - `data_alteracao`: Data da última alteração do registro.
-  - `status`: Indica se o login está ativo.
-
-```python
-class Login(db.Model):
-    # Definição dos campos e relacionamentos
-```
-
----
-
-### 9. **Inscrições** (`tb_inscricoes.py`)
-
-**Tabela: `tb_inscricoes`**
-
-Armazena as informações sobre as inscrições dos colaboradores nos treinamentos.
-
-- **Campos:**
-  - `id_inscricao`: Chave primária.
-  - `id_colaborador`: Chave estrangeira referenciando `tb_colaboradores`.
-  - `id_treinamento`: Chave estrangeira referenciando `tb_treinamentos`.
-  - `id_responsavel`: Chave estrangeira referenciando `tb_responsaveis` (responsável pela inscrição).
-  - `data_inscricao`: Data da inscrição.
-  - `status`: Status da inscrição (ex: "Pendente", "Concluída", "Cancelada").
-  - `data_criacao`: Data de criação do registro.
-  - `data_alteracao`: Data da última alteração do registro.
-
-```python
-class Inscricao(db.Model):
-    # Definição dos campos e relacionamentos
-```
-
----
-
-### 10. **Inicialização dos Models** (`__init__.py`)
-
-Este arquivo é responsável por inicializar os modelos no banco de dados e conectá-los ao aplicativo Flask.
-
-```python
-from .enum_filiais import Filiais
-from .tb_responsaveis import Responsavel
-from .tb_tipos import Tipo
-from .tb_marcas import Marca
-from .tb_treinamentos import Treinamento
-from .tb_empresas import Empresa
-from .tb_colaboradores import Colaborador
-from .tb_logins import Login
-from .tb_inscricoes import Inscricao
-```
-
----
-
-### Considerações Finais
-
-- Cada model possui um método `__repr__` que permite exibir uma representação legível da instância.
-- As colunas `data_criacao`, `data_alteracao` e `status` foram adicionadas às tabelas onde é necessário controle de auditoria e estado.
-- As relações entre tabelas são definidas com `ForeignKey` e `relationship` para garantir integridade referencial e facilitar a navegação entre os dados.
+### Métodos:
+- **__repr__()**: Representa a instância como uma string, mostrando os principais atributos.

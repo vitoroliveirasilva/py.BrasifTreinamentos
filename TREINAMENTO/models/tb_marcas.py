@@ -11,8 +11,7 @@ class Marca(db.Model):
     data_alteracao = db.Column(db.TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
     status = db.Column(db.Boolean, default=True)
 
-    marcas_tipos = db.relationship('MarcaTipo', back_populates='marca', lazy=True)
-    treinamentos = db.relationship('Treinamento', back_populates='marca', lazy=True)
+    marca_tipo = db.relationship('MarcaTipo', back_populates='marca', lazy=True)
 
     def __repr__(self):
         return f"<Marca(id_marca={self.id_marca}, nome='{self.nome}', " \

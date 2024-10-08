@@ -9,8 +9,10 @@ class MarcaTipo(db.Model):
     id_marca = db.Column(db.Integer, db.ForeignKey('tb_marcas.id_marca'), nullable=False)
     id_tipo = db.Column(db.Integer, db.ForeignKey('tb_tipos.id_tipo'), nullable=False)
 
-    marca = db.relationship('Marca', back_populates='marcas_tipos')
-    tipo = db.relationship('Tipo', back_populates='marcas_tipos')
+    logins = db.relationship('Login', back_populates='marca_tipo')
+    marca = db.relationship('Marca', back_populates='marca_tipo')
+    tipo = db.relationship('Tipo', back_populates='marca_tipo')
+    treinamentos = db.relationship('Treinamento', back_populates='marca_tipo')
 
     UniqueConstraint('id_marca', 'id_tipo', name='unique_marca_tipo')
 

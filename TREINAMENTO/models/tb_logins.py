@@ -15,7 +15,7 @@ class Login(db.Model):
     status = db.Column(db.Boolean, default=True)
 
     colaborador = db.relationship('Colaborador', back_populates='logins')
-    marca_tipo = db.relationship('MarcaTipo', backref=db.backref('logins', lazy=True))
+    marca_tipo = db.relationship('MarcaTipo', back_populates='logins', lazy='joined')
 
     UniqueConstraint('id_marca_tipo', 'usuario', name='unique_usuario_marca_tipo')
 

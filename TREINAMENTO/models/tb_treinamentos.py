@@ -14,7 +14,7 @@ class Treinamento(db.Model):
     data_alteracao = db.Column(db.TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
     status = db.Column(db.Boolean, default=True)
 
-    marca_tipo = db.relationship('MarcaTipo', backref=db.backref('treinamentos', lazy=True))
+    marca_tipo = db.relationship('MarcaTipo', back_populates='treinamentos', lazy='joined')
 
     UniqueConstraint('id_marca_tipo', 'treinamento', name='unique_treinamento_marca_tipo')
 

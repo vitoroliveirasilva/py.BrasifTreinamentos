@@ -13,6 +13,7 @@
                 <tr>
                     <th>Tipo</th>
                     <th>Editar</th>
+                    <th>Treinamentos</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,11 @@
                     <td>
                         <a href="{{ url_for('tipo.editar_tipo', id=tipo.id_tipo) }}">
                             Editar
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('tabela.treinamentos_por_tipo', id=tipo.id_tipo) }}">
+                            Treinamentos
                         </a>
                     </td>
                 </tr>

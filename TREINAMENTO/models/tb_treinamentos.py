@@ -14,6 +14,7 @@ class Treinamento(db.Model):
 
     inscricoes = db.relationship('Inscricao', backref='treinamento_inscricao', lazy=True)
     tipo = db.relationship('Tipo', back_populates='treinamentos', lazy=True)
+    marca = db.relationship('Marca', back_populates='treinamentos', lazy=True)
 
     def __repr__(self):
         return f"<Treinamento(id_treinamento={self.id_treinamento}, treinamento='{self.treinamento}', id_marca={self.id_marca}, id_tipo={self.id_tipo})>"

@@ -7,3 +7,5 @@ from .inscricoes_por_treinamento import *
 
 from .colaboradores_por_empresa import *
 from .colaboradores_por_responsavel import *
+
+from .treinamentos_por_tipo import *

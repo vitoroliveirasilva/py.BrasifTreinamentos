@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% set title = "Treinamentos por Tipo" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Treinamentos do Tipo: {{ tipo.nome }}</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Marca</th>
+                    <th>Treinamento</th>
+                    <th>Inscrições</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for treinamento in treinamentos.items %}
+                <tr>
+                    <td>{{ treinamento.marca.nome }}</td>
+                    <td>{{ treinamento.treinamento }}</td>
+                    <td>
+                        <a href="{{ url_for('tabela.inscricoes_por_treinamento', id_treinamento=treinamento.id_treinamento) }}">
+                            Ver Inscrições
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if treinamentos.has_prev %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.treinamentos_por_tipo', id=id, page=treinamentos.prev_num) }}">Anterior</a>
+            </li>
+            {% endif %}
+            <li class="page-item disabled"><a class="page-link" href="">Página {{ treinamentos.page }} de
+                    {{ treinamentos.pages }}</a></li>
+            {% if treinamentos.has_next %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('tabela.treinamentos_por_tipo', id=id, page=treinamentos.next_num) }}">Próxima</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

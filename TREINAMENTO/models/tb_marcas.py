@@ -10,7 +10,7 @@ class Marca(db.Model):
     data_alteracao = db.Column(db.TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
     status = db.Column(db.Boolean, default=True)
 
-    treinamentos = db.relationship('Treinamento', backref='marca_treinamento', lazy=True)
+    treinamentos = db.relationship('Treinamento', back_populates='marca', lazy=True)
     logins = db.relationship('Login', backref='marca_login', lazy=True)
 
     def __repr__(self):

@@ -27,15 +27,19 @@
                     <th>User</th>
                     <th>Colaborador</th>
                     <th>Marca</th>
+                    <th>Tipo</th>
+                    <th>Status</th>
                     <th>Editar</th>
                 </tr>
             </thead>
             <tbody>
-                {% for login, colaborador, marca in logins.items %}
+                {% for login in logins.items %}
                 <tr>
                     <td>{{ login.usuario }}</td>
-                    <td>{{ colaborador.nome }}</td>
-                    <td>{{ marca.nome }}</td>
+                    <td>{{ login.colaborador.nome }}</td>
+                    <td>{{ login.marca_tipo.marca.nome }}</td>
+                    <td>{{ login.marca_tipo.tipo.nome }}</td>
+                    <td>{{ 'Ativo' if login.status else 'Inativo' }}</td>
                     <td>
                         <a href="{{ url_for('login.editar_login', id=login.id_login) }}">
                             Editar

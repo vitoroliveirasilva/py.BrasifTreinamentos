@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="container">
+    
     <!-- Seção para exibir mensagens flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -17,7 +18,7 @@
     {% endfor %}
     {% endif %}
     {% endwith %}
-    
+
     <h1 class="text-center">Inscrições de {{ colaborador.nome }}</h1>
 
     <div class="table-responsive">

@@ -18,7 +18,7 @@ def cadastro_marca():
             db.session.add(marca)
             db.session.commit()
             flash("Marca cadastrada com sucesso!", "success")
-            return redirect(url_for("tabela.tabela_marcas"))
+            return redirect(url_for("tabela.marcas_por_empresa"))
         
         except ValueError as ve:
             db.session.rollback()

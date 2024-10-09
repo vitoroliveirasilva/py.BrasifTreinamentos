@@ -18,7 +18,7 @@ def editar_marca(id):
             Marca.atualizar_marca(marca, form)
             db.session.commit()
             flash("marca atualizado com sucesso!", "success")
-            return redirect(url_for("tabela.tabela_marcas"))
+            return redirect(url_for("tabela.marcas_por_empresa"))
         
         except ValueError as ve:
             db.session.rollback()

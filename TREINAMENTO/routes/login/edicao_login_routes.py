@@ -46,7 +46,7 @@ def editar_login(id):
             login.atualizar_login(form)
             db.session.commit()
             flash("Login atualizado com sucesso!", "success")
-            return redirect(url_for("login.editar_login", id=id))
+            return redirect(url_for("tabela.tabela_logins", id=id))
         
         except ValueError as ve:
             db.session.rollback()

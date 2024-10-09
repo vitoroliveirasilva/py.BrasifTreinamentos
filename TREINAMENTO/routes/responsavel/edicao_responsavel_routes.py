@@ -19,7 +19,7 @@ def editar_responsavel(id):
             responsavel.atualizar_responsavel(form)
             db.session.commit()
             flash("Responsável atualizado com sucesso!", "success")
-            return redirect(url_for("responsavel.cadastro_empresa"))
+            return redirect(url_for("tabela.tabela_responsaveis"))
         
         except ValueError as ve:
             db.session.rollback()

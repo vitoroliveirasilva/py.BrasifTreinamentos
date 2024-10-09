@@ -33,7 +33,7 @@ def editar_empresa(id):
             Empresa.atualizar_empresa(empresa, form)
             db.session.commit()
             flash("Empresa atualizado com sucesso!", "success")
-            return redirect(url_for("empresa.cadastro_empresa"))
+            return redirect(url_for("tabela.tabela_empresas"))
         
         except ValueError as ve:
             db.session.rollback()

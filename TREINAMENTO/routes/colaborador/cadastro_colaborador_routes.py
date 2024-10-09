@@ -28,18 +28,20 @@ def cadastro_colaborador():
             flash("Nenhuma filial encontrada. Por favor, abra um chamado para a T.I. para que o problema possa ser solucionado.", "danger")
             form.filial.choices = []
         else:
-            form.filial.choices += [(filial.name, filial.value) for filial in Filiais]
+            form.filial.choices = [("", "Selecione uma filial")] + [(filial.name, filial.value) for filial in Filiais]
 
         empresas = Empresa.query.filter_by(status=True).all()
         if not empresas:
             flash("Nenhuma empresa encontrada. Por favor, cadastre uma empresa antes de cadastrar um colaborador.", "warning")
             form.id_empresa.choices = []
         else:
-            form.id_empresa.choices += [(empresa.id_empresa, empresa.nome_empresa) for empresa in empresas]
+            form.id_empresa.choices = [(-1, "Selecione uma empresa")] + [(empresa.id_empresa, empresa.nome_empresa) for empresa in empresas]
+
 
     except SQLAlchemyError as e:
         flash(f"Erro ao acessar o banco de dados ao carregar as empresas: {str(e)}", "danger")
         form.id_empresa.choices = []
+
     except Exception as e:
         flash(f"Erro inesperado ao carregar as opções: {str(e)}", "danger")
         form.id_empresa.choices = []
@@ -51,7 +53,7 @@ def cadastro_colaborador():
             db.session.add(colaborador)
             db.session.commit()
             flash("Colaborador cadastrado com sucesso!", "success")
-            return redirect(url_for("colaborador.cadastro_colaborador"))
+            return redirect(url_for("tabela.tabela_colaboradores"))
 
         except ValueError as ve:
             db.session.rollback()

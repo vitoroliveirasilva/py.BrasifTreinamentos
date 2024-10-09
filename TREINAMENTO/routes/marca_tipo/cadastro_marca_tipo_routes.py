@@ -44,7 +44,7 @@ def cadastro_colaborador():
             db.session.add(marca_tipo)
             db.session.commit()
             flash("Relação 'marca x tipo' registrada com sucesso!", "success")
-            return redirect(url_for("menu"))
+            return redirect(url_for("tabela.marcas_por_empresa"))
         
         except ValueError as ve:
             db.session.rollback()

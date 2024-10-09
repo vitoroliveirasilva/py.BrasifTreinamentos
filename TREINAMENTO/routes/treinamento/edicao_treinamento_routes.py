@@ -38,7 +38,7 @@ def editar_treinamento(id):
             Treinamento.atualizar_treinamento(treinamento, form)
             db.session.commit()
             flash("Treinamento atualizado com sucesso!", "success")
-            return redirect(url_for("tipo.cadastro_tipo"))
+            return redirect(url_for("tabela.tabela_treinamentos"))
 
         except ValueError as ve:
             db.session.rollback()

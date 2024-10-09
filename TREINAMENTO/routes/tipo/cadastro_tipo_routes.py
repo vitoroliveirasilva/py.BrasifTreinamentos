@@ -18,7 +18,7 @@ def cadastro_tipo():
             db.session.add(tipo)
             db.session.commit()
             flash("Tipo cadastrado com sucesso!", "success")
-            return redirect(url_for("tabela.tabela_tipos"))
+            return redirect(url_for("tabela.marcas_por_empresa"))
 
         except ValueError as ve:
             db.session.rollback()

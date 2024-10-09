@@ -46,7 +46,7 @@ def cadastro_login():
             db.session.add(novo_login)
             db.session.commit()
             flash("Login cadastrado com sucesso!", "success")
-            return redirect(url_for("login.cadastro_login"))
+            return redirect(url_for("tabela.tabela_logins"))
         
         except ValueError as ve:
             db.session.rollback()

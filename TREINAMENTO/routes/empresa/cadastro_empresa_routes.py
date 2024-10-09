@@ -33,7 +33,7 @@ def cadastro_empresa():
             db.session.add(empresa)
             db.session.commit()
             flash("Empresa cadastrada com sucesso!", "success")
-            return redirect(url_for("empresa.cadastro_empresa"))
+            return redirect(url_for("tabela.tabela_empresas"))
         
         except ValueError as ve:
             db.session.rollback()

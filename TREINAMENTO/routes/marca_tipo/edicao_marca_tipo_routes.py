@@ -7,10 +7,11 @@ from TREINAMENTO.models import Marca, Tipo, MarcaTipo
 from . import marca_tipo_bp
 
 
-@marca_tipo_bp.route("/cadastro", methods=["GET", "POST"])
+@marca_tipo_bp.route("/editar/<int:id>", methods=["GET", "POST"])
 @login_required
-def cadastro_marca_tipo():
-    form = MarcaTipoForm()
+def editar_marca_tipo(id):
+    marca_tipo = MarcaTipo.query.get_or_404(id)
+    form = MarcaTipoForm(obj=marca_tipo)
 
     try:
         marcas = Marca.query.filter_by(status=True).all()
@@ -39,10 +40,10 @@ def cadastro_marca_tipo():
     
     if form.validate_on_submit():
         try:
-            marca_tipo = MarcaTipo.cadastro_marca_tipo(form)
+            marca_tipo = MarcaTipo.atualizar_marca_tipo(marca_tipo, form)
             db.session.add(marca_tipo)
             db.session.commit()
-            flash("Relação 'marca x tipo' registrada com sucesso!", "success")
+            flash("Relação 'marca x tipo' atualizado com sucesso!", "success")
             return redirect(url_for("tabela.marcas_por_empresa"))
         
         except ValueError as ve:
@@ -57,5 +58,5 @@ def cadastro_marca_tipo():
             db.session.rollback()
             flash(f"Erro inesperado: {str(e)}", "danger")
 
-    return render_template("/cadastro/cadastro_marca_tipo.html", form=form)
+    return render_template("/edicao/edicao_marca_tipo.html", form=form)
 

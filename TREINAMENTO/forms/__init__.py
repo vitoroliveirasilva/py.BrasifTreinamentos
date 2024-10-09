@@ -21,3 +21,6 @@ from .responsavel_forms import ResponsavelForm
 
 # Inscrição
 from .inscricao import InscricaoTreinamentoForm, InscricaoColaboradorForm
+
+# Marca x Tipo
+from .marca_tipo_forms import MarcaTipoForm

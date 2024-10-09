@@ -9,6 +9,7 @@ from .tipo import tipo_bp
 from .treinamento import treinamento_bp
 from .tabelas import tabela_bp
 from .inscricao import inscricao_bp
+from .marca_tipo import marca_tipo_bp
 
 def register_blueprint(app):
     app.register_blueprint(menu_bp)
@@ -22,3 +23,4 @@ def register_blueprint(app):
     app.register_blueprint(treinamento_bp)
     app.register_blueprint(tabela_bp)
     app.register_blueprint(inscricao_bp)
+    app.register_blueprint(marca_tipo_bp)

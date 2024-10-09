@@ -1,4 +1,5 @@
 from TREINAMENTO import db
+from datetime import datetime
 from sqlalchemy import UniqueConstraint
 
 
@@ -8,6 +9,8 @@ class MarcaTipo(db.Model):
     id_marca_tipo = db.Column(db.Integer, primary_key=True, autoincrement=True)
     id_marca = db.Column(db.Integer, db.ForeignKey('tb_marcas.id_marca'), nullable=False)
     id_tipo = db.Column(db.Integer, db.ForeignKey('tb_tipos.id_tipo'), nullable=False)
+    data_criacao = db.Column(db.TIMESTAMP, default=datetime.utcnow)
+    data_alteracao = db.Column(db.TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     logins = db.relationship('Login', back_populates='marca_tipo')
     marca = db.relationship('Marca', back_populates='marca_tipo')

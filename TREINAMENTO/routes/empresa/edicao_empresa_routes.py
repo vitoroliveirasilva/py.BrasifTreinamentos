@@ -32,7 +32,7 @@ def editar_empresa(id):
         try:
             Empresa.atualizar_empresa(empresa, form)
             db.session.commit()
-            flash("Empresa atualizado com sucesso!", "success")
+            flash("Empresa atualizada com sucesso!", "success")
             return redirect(url_for("tabela.tabela_empresas"))
         
         except ValueError as ve:

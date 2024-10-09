@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container">
-    
+
     <!-- Seção para exibir mensagens flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -33,10 +33,10 @@
                 </tr>
             </thead>
             <tbody>
-                {% for treinamento, marca, tipo in treinamentos.items %}
+                {% for treinamento in treinamentos.items %}
                 <tr>
-                    <td>{{ tipo.nome }}</td>
-                    <td>{{ marca.nome }}</td>
+                    <td>{{ treinamento.marca_tipo.tipo.nome }}</td>
+                    <td>{{ treinamento.marca_tipo.marca.nome }}</td>
                     <td>{{ treinamento.treinamento }}</td>
                     <td>
                         <a href="{{ url_for('treinamento.editar_treinamento', id=treinamento.id_treinamento) }}">
@@ -44,7 +44,8 @@
                         </a>
                     </td>
                     <td>
-                        <a href="{{ url_for('tabela.inscricoes_por_treinamento', id_treinamento=treinamento.id_treinamento) }}">
+                        <a
+                            href="{{ url_for('tabela.inscricoes_por_treinamento', id_treinamento=treinamento.id_treinamento) }}">
                             Ver Inscrições
                         </a>
                     </td>
@@ -53,6 +54,7 @@
             </tbody>
         </table>
     </div>
+
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             {% if treinamentos.has_prev %}

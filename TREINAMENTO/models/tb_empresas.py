@@ -31,7 +31,7 @@ class Empresa(db.Model):
         empresa_existente = cls.query.filter_by(nome_empresa=form.nome_empresa.data, filial=form.filial.data).first()
 
         if empresa_existente:
-            raise ValueError(f"A empresa '{form.nome_empresa.data}' já existe para a filial '{form.filial.data}'. Por favor, escolha outro nome.")
+            raise ValueError(f"A empresa '{form.nome_empresa.data}' já existe para a filial '{form.filial.data.capitalize()}'. Por favor, escolha outro nome.")
         
         # Cria e retorna uma nova instância de Empresa
         return cls(

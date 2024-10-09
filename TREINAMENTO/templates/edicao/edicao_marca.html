@@ -24,18 +24,8 @@
         {{ form.hidden_tag() }}
 
         <div class="form-group">
-            {{ form.id_tipo.label(class="form-label") }}
-            {{ form.id_tipo(class="form-control") }}
-            {% for error in form.id_tipo.errors %}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
-                    class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-            </div>
-            {% endfor %}
-        </div>
-
-        <div class="form-group">
             {{ form.nome.label(class="form-label") }}
-            {{ form.nome(class="form-control", placeholder="Insira a marca") }}
+            {{ form.nome(class="form-control", placeholder="Insira o nome da marca") }}
             {% for error in form.nome.errors %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
                     class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>

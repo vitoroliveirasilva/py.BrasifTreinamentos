@@ -15,7 +15,7 @@ def inscricao_colaborador(id):
 
     form.filial.choices += [(filial.name, filial.value) for filial in Filiais]
 
-    # Se houver um valor de filial na sessão, defina-o como o valor padrão do formulário
+    # Se houver um valor de filial na sessão, define como o valor padrão do formulário
     if 'inscricao_colaborador_filial' in session:
         filial_session = session['inscricao_colaborador_filial']
         form.filial.data = filial_session

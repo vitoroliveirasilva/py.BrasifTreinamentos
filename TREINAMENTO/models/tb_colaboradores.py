@@ -32,7 +32,7 @@ class Colaborador(db.Model):
 
     @classmethod
     def cadastro_colaborador(cls, form, id_responsavel):
-                
+
         if not id_responsavel:
             raise ValueError("Não foi possível obter o ID do responsável logado no sistema.")
         
@@ -54,7 +54,7 @@ class Colaborador(db.Model):
         )
 
     def atualizar_colaborador(self, form):
-        
+
         # Verifica se o email já está sendo utilizado por outro colaborador
         colaborador_existente = Colaborador.query.filter_by(email=form.email.data).first()
 
@@ -66,7 +66,6 @@ class Colaborador(db.Model):
         self.email = form.email.data
         self.cargo = form.cargo.data
         self.id_empresa = form.id_empresa.data
-        self.id_responsavel = form.id_responsavel.data
         self.filial = form.filial.data
         self.status = form.status.data
         return self

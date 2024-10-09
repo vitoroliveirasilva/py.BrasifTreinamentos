@@ -22,21 +22,20 @@ def cadastro_colaborador():
         flash(f"Erro inesperado ao obter id do usuário logado: {str(e)}", "danger")
         return redirect(url_for("home"))
     
-    
+
     try:
         if not Filiais:
             flash("Nenhuma filial encontrada. Por favor, abra um chamado para a T.I. para que o problema possa ser solucionado.", "danger")
             form.filial.choices = []
         else:
-            form.filial.choices = [(filial.name, filial.value) for filial in Filiais]
-            
-        
+            form.filial.choices += [(filial.name, filial.value) for filial in Filiais]
+
         empresas = Empresa.query.filter_by(status=True).all()
         if not empresas:
             flash("Nenhuma empresa encontrada. Por favor, cadastre uma empresa antes de cadastrar um colaborador.", "warning")
             form.id_empresa.choices = []
         else:
-            form.id_empresa.choices = [(empresa.id_empresa, empresa.nome_empresa) for empresa in empresas]
+            form.id_empresa.choices += [(empresa.id_empresa, empresa.nome_empresa) for empresa in empresas]
 
     except SQLAlchemyError as e:
         flash(f"Erro ao acessar o banco de dados ao carregar as empresas: {str(e)}", "danger")
@@ -45,7 +44,7 @@ def cadastro_colaborador():
         flash(f"Erro inesperado ao carregar as opções: {str(e)}", "danger")
         form.id_empresa.choices = []
 
-    
+
     if form.validate_on_submit():
         try:
             colaborador = Colaborador.cadastro_colaborador(form, id_responsavel)
@@ -53,7 +52,7 @@ def cadastro_colaborador():
             db.session.commit()
             flash("Colaborador cadastrado com sucesso!", "success")
             return redirect(url_for("colaborador.cadastro_colaborador"))
-        
+
         except ValueError as ve:
             db.session.rollback()
             flash(str(ve), "warning")
@@ -67,4 +66,3 @@ def cadastro_colaborador():
             flash(f"Erro inesperado: {str(e)}", "danger")
 
     return render_template("/cadastro/cadastro_colaborador.html", form=form)
-

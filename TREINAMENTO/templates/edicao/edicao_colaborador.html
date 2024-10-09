@@ -54,19 +54,19 @@
         </div>
 
         <div class="form-group">
-            {{ form.id_empresa.label(class="form-label") }}
-            {{ form.id_empresa(class="form-control") }}
-            {% for error in form.id_empresa.errors %}
+            {{ form.filial.label(class="form-label") }}
+            {{ form.filial(class="form-control") }}
+            {% for error in form.filial.errors %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
                     class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             {% endfor %}
         </div>
-
+        
         <div class="form-group">
-            {{ form.filial.label(class="form-label") }}
-            {{ form.filial(class="form-control") }}
-            {% for error in form.filial.errors %}
+            {{ form.id_empresa.label(class="form-label") }}
+            {{ form.id_empresa(class="form-control") }}
+            {% for error in form.id_empresa.errors %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ error }}<button type="button"
                     class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>

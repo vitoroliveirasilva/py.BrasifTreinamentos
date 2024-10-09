@@ -2,9 +2,12 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SelectField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Length
 
+
 class TreinamentoForm(FlaskForm):
     # Campo para selecionar a combinação de Marca e Tipo
-    id_marca_tipo = SelectField("Marca e Tipo", coerce=int, validators=[DataRequired(message="Por favor, selecione uma marca e tipo.")])
+    id_marca_tipo = SelectField("Marca e Tipo", coerce=int, validators=[
+        DataRequired(message="Por favor, selecione uma marca e tipo.")
+    ])
 
     # Nome do treinamento
     treinamento = StringField("Nome do Treinamento", validators=[
@@ -13,10 +16,11 @@ class TreinamentoForm(FlaskForm):
     ])
 
     # Descrição do treinamento
-    descricao = TextAreaField("Descrição", validators=[Length(max=300, message="A descrição pode ter no máximo 300 caracteres.")])
+    descricao = TextAreaField("Descrição", validators=[
+        Length(max=500, message="A descrição pode ter no máximo 500 caracteres.")
+    ])
 
     # Status do treinamento (ativo/inativo)
     status = BooleanField("Ativo", default=True)
 
-    # Botão de submissão
     submit = SubmitField("Salvar")

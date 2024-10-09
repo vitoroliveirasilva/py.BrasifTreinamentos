@@ -4,6 +4,14 @@ from wtforms.validators import DataRequired
 
 
 class MarcaTipoForm(FlaskForm):
-    id_marca = SelectField('Marca', coerce=int, validators=[DataRequired()])
-    id_tipo = SelectField('Tipo', coerce=int, validators=[DataRequired()])
+    # Campo para selecionar o id da marca
+    id_marca = SelectField('Marca', coerce=int, validators=[
+        DataRequired(message="Por favor, selecione uma marca.")
+    ])
+
+    # Campo para selecionar o id do tipo
+    id_tipo = SelectField('Tipo', coerce=int, validators=[
+        DataRequired(message="Por favor, selecione um tipo.")
+    ])
+
     submit = SubmitField('Salvar')

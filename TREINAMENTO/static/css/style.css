@@ -114,3 +114,8 @@ button[type=submit]:hover {
     flex-direction: column;
     gap: .5rem;
 }
+
+.descricao {
+    max-width: 8rem;
+    overflow: auto;
+}

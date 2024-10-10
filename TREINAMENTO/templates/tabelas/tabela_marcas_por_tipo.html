@@ -28,6 +28,7 @@
                     <th>Marca</th>
                     <th>Tipo</th>
                     <th>Logins</th>
+                    <th>Treinamentos</th>
                     <th>Editar</th>
                 </tr>
             </thead>
@@ -39,6 +40,11 @@
                     <td>
                         <a href="{{ url_for('tabela.logins_por_marca_tipo', id_marca_tipo=marca_tipo.id_marca_tipo) }}">
                             Logins
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('tabela.treinamentos_por_marca_tipo', id_marca_tipo=marca_tipo.id_marca_tipo) }}">
+                            Treinamentos
                         </a>
                     </td>
                     <td>

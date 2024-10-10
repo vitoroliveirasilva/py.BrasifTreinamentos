@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% set title = "Treinamentos por Tipo" %}
+{% set title = "Treinamentos por Marca - Tipo" %}
 
 {% block content %}
 <div class="container">
-    
+
     <!-- Seção para exibir mensagens flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -19,28 +19,23 @@
     {% endif %}
     {% endwith %}
 
-    <h1 class="text-center">Treinamentos do Tipo: {{ tipo.nome }}</h1>
+    <h1 class="text-center">Treinamentos atribuídos a {{ marca_tipo.marca.nome }} - {{ marca_tipo.tipo.nome }}</h1>
 
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Marca</th>
                     <th>Treinamento</th>
-                    <th>Inscrições</th>
+                    <th>Descrição</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 {% for treinamento in treinamentos.items %}
                 <tr>
-                    <td>{{ treinamento.marca.nome }}</td>
                     <td>{{ treinamento.treinamento }}</td>
-                    <td>
-                        <a
-                            href="{{ url_for('tabela.inscricoes_por_treinamento', id_treinamento=treinamento.id_treinamento) }}">
-                            Ver Inscrições
-                        </a>
-                    </td>
+                    <td class="descricao">{{ treinamento.descricao }}</td>
+                    <td>{% if treinamento.status %}Ativo{% else %}Inativo{% endif %}</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -16,4 +16,4 @@ def colaboradores_por_responsavel(id_responsavel):
     # Consulta para trazer todos os colaboradores por responsável (ativos e inativos)
     colaboradores = Colaborador.query.filter_by(id_responsavel=id_responsavel).paginate(page=page, per_page=per_page, error_out=False)
 
-    return render_template('tabelas/associacoes/tabela_colaboradores_por_responsavel.html', colaboradores=colaboradores, responsavel_name=responsavel.nome)
+    return render_template('tabelas/associacoes/tabela_colaboradores_por_responsavel.html', colaboradores=colaboradores, responsavel_nome=responsavel.nome)

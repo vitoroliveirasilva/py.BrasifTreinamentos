@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="container">
+
     <!-- Seção para exibir mensagens flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -18,23 +19,29 @@
     {% endif %}
     {% endwith %}
     
-    <h1 class="text-center">Colaboradores da Empresa {{ empresa.nome_empresa }}</h1>
+    <h1 class="text-center">Colaboradores atribuídos a {{ empresa_nome }}</h1>
 
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Status</th>
                     <th>Nome</th>
                     <th>E-mail</th>
                     <th>Cargo</th>
+                    <th>Filial</th>
+                    <th>Empresa</th>
                 </tr>
             </thead>
             <tbody>
                 {% for colaborador in colaboradores.items %}
                 <tr>
+                    <td>{% if colaborador.status %}Ativo{% else %}Inativo{% endif %}</td>
                     <td>{{ colaborador.nome }}</td>
                     <td>{{ colaborador.email }}</td>
                     <td>{{ colaborador.cargo }}</td>
+                    <td>{{ colaborador.filial.name|title }}</td>
+                    <td>{{ colaborador.empresa.nome_empresa }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

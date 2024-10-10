@@ -16,4 +16,4 @@ def inscricoes_por_responsavel(id_responsavel):
     # Faz a consulta de todas as inscrições vinculadas ao responsável, sem filtrar por status
     inscricoes = Inscricao.query.filter_by(id_responsavel=id_responsavel).paginate(page=page, per_page=per_page)
 
-    return render_template('/tabelas/associacoes/tabela_inscricoes_por_responsavel.html', inscricoes=inscricoes, responsavel_name=responsavel.nome)
+    return render_template('/tabelas/associacoes/tabela_inscricoes_por_responsavel.html', inscricoes=inscricoes, responsavel_nome=responsavel.nome)

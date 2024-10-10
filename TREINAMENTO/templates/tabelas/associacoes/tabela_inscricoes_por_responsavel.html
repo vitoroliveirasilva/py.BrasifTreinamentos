@@ -17,28 +17,26 @@
     {% endfor %}
     {% endif %}
     {% endwith %}
-    
-    <h1 class="text-center">Inscrições feitas por {{ responsavel.nome }}</h1>
+
+    <h1 class="text-center">Inscrições realizadas por {{ responsavel_name }}</h1>
 
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Treinamento</th>
-                    <th>Marca</th>
-                    <th>Status</th>
+                    <th>Nome do Colaborador</th>
                     <th>Data de Inscrição</th>
-                    <th>Colaborador</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                {% for inscricao, treinamento, marca, colaborador in inscricoes.items %}
+                {% for inscricao in inscricoes.items %}
                 <tr>
-                    <td>{{ treinamento.treinamento }}</td>
-                    <td>{{ marca.nome }}</td>
-                    <td>{{ inscricao.status }}</td>
+                    <td>{{ inscricao.treinamento.treinamento }}</td>
+                    <td>{{ inscricao.colaborador.nome }}</td>
                     <td>{{ inscricao.data_inscricao.strftime('%d/%m/%Y') }}</td>
-                    <td>{{ colaborador.nome }}</td>
+                    <td>{{ inscricao.status }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -48,15 +46,22 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             {% if inscricoes.has_prev %}
-            <li class="page-item"><a class="page-link"
-                    href="{{ url_for('tabela.inscricoes_por_responsavel', id_responsavel=responsavel.id, page=inscricoes.prev_num) }}">Anterior</a>
+            <li class="page-item">
+                <a class="page-link"
+                    href="{{ url_for('tabela.inscricoes_por_responsavel', id_responsavel=responsavel.id, page=inscricoes.prev_num) }}">
+                    Anterior
+                </a>
             </li>
             {% endif %}
-            <li class="page-item disabled"><a class="page-link" href="">Página {{ inscricoes.page }} de
-                    {{ inscricoes.pages }}</a></li>
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Página {{ inscricoes.page }} de {{ inscricoes.pages }}</a>
+            </li>
             {% if inscricoes.has_next %}
-            <li class="page-item"><a class="page-link"
-                    href="{{ url_for('tabela.inscricoes_por_responsavel', id_responsavel=responsavel.id, page=inscricoes.next_num) }}">Próxima</a>
+            <li class="page-item">
+                <a class="page-link"
+                    href="{{ url_for('tabela.inscricoes_por_responsavel', id_responsavel=responsavel.id, page=inscricoes.next_num) }}">
+                    Próxima
+                </a>
             </li>
             {% endif %}
         </ul>

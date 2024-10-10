@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% set title = "Marcas por empresa" %}
+{% set title = "Marcas por tipo" %}
 
 {% block content %}
 <div class="container">
@@ -19,7 +19,7 @@
     {% endif %}
     {% endwith %}
     
-    <h1 class="text-center">Marcas por empresa</h1>
+    <h1 class="text-center">Marcas por tipo</h1>
 
     <div class="table-responsive">
         <table class="table table-striped">
@@ -27,6 +27,7 @@
                 <tr>
                     <th>Marca</th>
                     <th>Tipo</th>
+                    <th>Logins</th>
                     <th>Editar</th>
                 </tr>
             </thead>
@@ -35,6 +36,11 @@
                 <tr>
                     <td>{{ marca_tipo.marca.nome }}</td>
                     <td>{{ marca_tipo.tipo.nome }}</td>
+                    <td>
+                        <a href="{{ url_for('tabela.logins_por_marca_tipo', id_marca_tipo=marca_tipo.id_marca_tipo) }}">
+                            Logins
+                        </a>
+                    </td>
                     <td>
                         <a href="{{ url_for('marca_tipo.editar_marca_tipo', id=marca_tipo.id_marca_tipo) }}">
                             Editar

@@ -5,9 +5,9 @@ from TREINAMENTO.models import MarcaTipo
 from . import tabela_bp
 
 
-@tabela_bp.route('/marcas_por_empresa')
+@tabela_bp.route('/marcas_por_tipo')
 @login_required
-def marcas_por_empresa():
+def marcas_por_tipo():
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 5, type=int)
 
@@ -21,4 +21,4 @@ def marcas_por_empresa():
         .paginate(page=page, per_page=per_page)
     )
 
-    return render_template('/tabelas/tabela_marcas_por_empresa.html', marcas_tipo=marcas_tipo)
+    return render_template('/tabelas/tabela_marcas_por_tipo.html', marcas_tipo=marcas_tipo)

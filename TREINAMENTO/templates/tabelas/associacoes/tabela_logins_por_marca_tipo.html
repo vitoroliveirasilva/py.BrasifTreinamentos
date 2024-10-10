@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% set title = "Logins por Colaborador" %}
+{% set title = "Logins por Marca - Tipo" %}
 
 {% block content %}
 <div class="container">
-    
+
     <!-- Seção para exibir mensagens flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -19,23 +19,23 @@
     {% endif %}
     {% endwith %}
     
-    <h1 class="text-center">Logins de {{ colaborador_nome }}</h1>
+    <h1 class="text-center">Logins atribuídos a {{ marca_tipo.marca.nome }} - {{ marca_tipo.tipo.nome }}</h1>
 
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Usuário</th>
-                    <th>Marca</th>
-                    <th>Tipo</th>
+                    <th>Nome do colaborador</th>
+                    <th>Status do colaborador</th>
                 </tr>
             </thead>
             <tbody>
                 {% for login in logins.items %}
                 <tr>
                     <td>{{ login.usuario }}</td>
-                    <td>{{ login.marca_tipo.marca.nome }}</td>
-                    <td>{{ login.marca_tipo.tipo.nome }}</td>
+                    <td>{{ login.colaborador.nome }}</td>
+                    <td>{% if login.colaborador.status %}Ativo{% else %}Inativo{% endif %}</td>
                 </tr>
                 {% endfor %}
             </tbody>

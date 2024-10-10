@@ -18,7 +18,7 @@
     {% endif %}
     {% endwith %}
     
-    <h1 class="text-center">Logins de {{ colaborador.nome }}</h1>
+    <h1 class="text-center">Logins de {{ colaborador_nome }}</h1>
 
     <div class="table-responsive">
         <table class="table table-striped">
@@ -26,13 +26,15 @@
                 <tr>
                     <th>Usuário</th>
                     <th>Marca</th>
+                    <th>Tipo</th>
                 </tr>
             </thead>
             <tbody>
-                {% for login, marca in logins.items %}
+                {% for login in logins.items %}
                 <tr>
                     <td>{{ login.usuario }}</td>
-                    <td>{{ marca.nome }}</td>
+                    <td>{{ login.marca_tipo.marca.nome }}</td>
+                    <td>{{ login.marca_tipo.tipo.nome }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

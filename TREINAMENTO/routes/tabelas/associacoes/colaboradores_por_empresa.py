@@ -1,8 +1,8 @@
 from flask import render_template, request
 from flask_login import login_required
-from TREINAMENTO import db
 from TREINAMENTO.models import Colaborador, Empresa
 from .. import tabela_bp
+
 
 @tabela_bp.route('/colaboradores/empresa/<int:id_empresa>')
 @login_required

@@ -3,6 +3,7 @@ from flask_login import login_required
 from TREINAMENTO.models import Colaborador, Responsavel
 from .. import tabela_bp
 
+
 @tabela_bp.route('/colaboradores/responsavel/<int:id_responsavel>')
 @login_required
 def colaboradores_por_responsavel(id_responsavel):

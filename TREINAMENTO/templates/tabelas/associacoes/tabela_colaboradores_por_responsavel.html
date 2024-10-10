@@ -18,12 +18,13 @@
     {% endif %}
     {% endwith %}
 
-    <h1 class="text-center">Colaboradores de {{ responsavel_name }}</h1>
+    <h1 class="text-center">Colaboradores atribuídos a {{ responsavel_name }}</h1>
 
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Status</th>
                     <th>Nome</th>
                     <th>E-mail</th>
                     <th>Cargo</th>
@@ -34,6 +35,7 @@
             <tbody>
                 {% for colaborador in colaboradores.items %}
                 <tr>
+                    <td>{% if colaborador.status %}Ativo{% else %}Inativo{% endif %}</td>
                     <td>{{ colaborador.nome }}</td>
                     <td>{{ colaborador.email }}</td>
                     <td>{{ colaborador.cargo }}</td>
